@@ -7,21 +7,48 @@ use \DTS\eBaySDK\Browse\Types;
 use \DTS\eBaySDK\Browse\Enums;
 
 $service = new Services\BrowseService([
-    'authorization' => 'v^1.1#i^1#f^0#p^1#I^3#r^0#t^H4sIAAAAAAAAAOVXa2wUVRTutts2WCrYVCgPYTOiRnFm7+zsY3ZgRxZaaAOlpbu0UINkHnfbsbMzw9y77K4aXUrEkDSoiJooRIjCDzURX0FFE0yMsSYE9YeY+IigCIn4iA8Eg+id7VK2VSnCakicP5N7zrnnfuc759wHyFWNu2lD84Zfal3V5dtzIFfucrE1YFxV5ewrK8qnVpaBIgPX9tysnLu/4thcJCV1S+iAyDINBD2ZpG4gIS+MUCnbEEwJaUgwpCREAlaEWLR1ieBjgGDZJjYVU6c8LY0RSoZ+jlMCoQTnD/FQThCpcdZn3IxQMMwCKPOAZ/1+XoWA6BFKwRYDYcnAEcoH2CDNAtoH4mxQYEMCyzEBnuumPJ3QRpppEBMGUGIerpCfaxdhPT9UCSFoY+KEEluiC2Nt0ZbGpqXxud4iX2KBhxiWcAqNHC0wVejplPQUPP8yKG8txFKKAhGivOLQCiOdCtGzYC4Cfp5qn8xBvx+oPAgqhMlASahcaNpJCZ8fhyPRVDqRNxWggTWcHYtRwoZ8O1RwYbSUuGhp9Di/ZSlJ1xIatCNU0/zoymh7OyU2Sms1NR6TaMAHVdofDCg0r8AQLUvhQFiR5BAbCBYWGfJUoHjUKgtMQ9UcwpBnqYnnQ4IYjuYFFPFCjNqMNjuawA6aYjv+LH++ULeT0KEMpnCv4eQUJgkJnvxwbPaHZ2Nsa3IKw2EPoxV5eiKUZFmaSo1W5uuwUDoZFKF6MbYErzedTjNpjjHtHq8PANa7onVJTOmFSYkq2Dq9nkHa2BNoLR+KAslMpAk4axEsGVKnBIDRQ4khPsjxBdpHohJHS/8kKArZO7IZStUcfkmRVTWosiGWCwV4uRTNIRbq0+vggLKUpZOS3QexpUsKpBVSZqkktDVV4AIJH8cnIK0GwwnaH04kaDmgkvUSEAIIZVkJ8/+XHrnQKl+ga0QZJ1VWslIvSZk3mwhD9ULr/C9DiymmBdtNXVOy/21sTq+PFR9nq+2SjbPzU1kyjkFdJ79LClfJZ3J1CfeskiTyH/TLxcWtSfjyipj1h4JhHvg47tLiIneYyyouxUwyzvbL2JKFTZsh0CwdIsaGyEzZ5M7FtDlncdzsgwbZ3rBt6jq0O9lLYgE5TXx58eDMR8SBZGkMdK97zqGEcOM1JRK9I12dB+0ZYfc3Rl45lWV6UhBhAkSF9r9wsHtHvjDEsvzH9rveAP2uV8kjBYQAzc4GN1ZVLHdXjKeQhiHJraHKZobRpASDtB6DXKBtyPTBrCVpdnmVq/WLgZX3FL1ttq8CDcOvm3EVbE3RUwdMP6epZCdMrmWDLHBOMOeS0A2uPad1s5Pc9e9eP29L2Q+5awZvaX558/7Q4Y3Lf4WgdtjI5aosc/e7yg4d/ypTd6Drffciq/1mcWONcrC6WflS8PbsRdse7ziyY/1OdeqiE/2bDu+q/n3SpBXfbn2Jr1u2tv7TruMP7XknvLXpa9E3sNv2L04Pruv6vGPfbWfemxLYsVl58NiRuvrxj0x75tZTh6YMTJuwZiJ8vjrZAeLHVs04LX4mNvz0St2dW+Tewx/NeQt/XF/57MyG1p0vPHrD9MEfG9Jpfd7T30e6jvpmnzFPTDizvsaeeX8o49n085Prjy7uW3Mg8/q+175ZdW/mZO3Ezk/u2nVyD3fdVU91Pza5Kz7nTav8xTXHAxueuEN8+8M9D9y9d8fKGVdEB3p3/3Zw1tXfNeEP2hOHcttODQa9B+/b+PD+5tNDafwDhjxfo3UOAAA='
-,    'debug' => false
-,   'sandbox' => true
+    'authorization' => 'v^1.1#i^1#f^0#p^1#I^3#r^0#t^H4sIAAAAAAAAAOVXa2wUVRTu9kUQ8YEGoUCyGQSkZWbv7O7sY8JuskshLelLdqm0hMedmTtl6O7MOPcO7daItQrGCGgw/iLGgqBoQn9AgkjURDQR+AHBiAnKDxGMhKQ0PgjiD/XOdCnbSijCakicP5N7zrnnfuc759yZA3orJ1Zvrtt8dbJnQml/L+gt9Xj4SWBiZUXNA2WlVRUloMDA09/7eG95X9nFhRhmM6a4DGHT0DHydmczOhZdYYyxLV00INawqMMswiKRxVSisUH0c0A0LYMYspFhvPW1MUbgFT+UQFgK8JGIHKZC/brLtBFjVCBIIAiQwod4KCg81WNso3odE6iTGOMHfIjlAevn07wgBngRBDkB8O2MtxVZWDN0asIBJu6iFd29VgHUWyOFGCOLUCdMvD6xJNWcqK9d3JRe6CvwFc/TkCKQ2Hj0apGhIG8rzNjo1sdg11pM2bKMMGZ88eETRjsVE9fB3AF8l2lJiAoRWfKH1DBSlXBxqFxiWFlIbo3DkWgKq7qmItKJRnLjMUrZkNYjmeRXTdRFfa3XeT1pw4ymasiKMYuTibZESwsTr4UbNCWdgiyIhBQ2GBJkNiKjMCvBqBCVoRTmhVD+kGFPeYrHnLLI0BXNIQx7mwySRBQxGsuLv4AXatSsN1sJlThoCu3Cef6CQdDuJHQ4gzZZpzs5RVlKgtddjs/+yG5CLE2yCRrxMFbh0hNjoGlqCjNW6dZhvnS6cYxZR4gp+nxdXV1cV4AzrA6fHwDet6KxISWvQ1nIXLd1eh1r429gNTcUGdGdWBNJzqRYummdUgB6BxMPR0KBSJ720ajiY6V/ExSE7BvdDMVqjiASkF9SI4ISAYpf9RejOeL5+vQ5OJAEc2wWWp2ImBkoI1amZWZnkaUpYkBQ/YGIilglFFXZYFRVWUlQ6HkqQgAhSZKjkf9Lj9xulS/KaFSZplVWvFIvRpnXGZgg5Xbr/KahpWTDRC1GRpNz/3FsTq+PE1/AUlqgRXJJO0fXKZTJ0NddhSu7mVxTzDurGIn8B/1yZ3FrkNxbEfPBcBjQSzoUvLu46D/MPRWXbGQ55/rlLGgSw+IoNDODMGchbNgW/efimp1vcdroRDq93ohlZDLIauXvigXsNPG9xYOzH1MH0NQoH+XPD1BKKDc+A9LoHekaF7R3tN3NjXySneM6bIQJBaIg61/4sPtGDxjxEvfh+zwfgz7Ph3RGAWHA8jVgfmXZ8vKy+xmsEURzqyuS0c1pUOWw1qHTH2gLcZ0oZ0LNKq30NJ7f0vZcwWjTvwpMGxluJpbxkwomHTDzhqaCf/CxyXQGAX6eFwI8CLaD2Te05fzU8kd7Jv00a9acPYltp16e90bP5aOHKuBGMHnEyOOpKCnv85TA/TWrFlTvON/5ibVRmxH9bfX5148PnQZDPWdW5E5NGXpq8FJi/4HqHdOPz1sqHJ5xpAIe/DZypneq/lKq/8S0K5GTg/1d323a3bev2fp064wXZh8h2/cduzj/xe41vy59eu03p++rmtIebThx8ANjwYGaK++WvRb8Zb1/efeeY2fb5iz7YdMrX25vejtW9ePg+8/Gd/15UWtdXv3eF+GHBqa37T0G571pJM+lrw0e3ZY8cHxuZ93qLYfb7JnJhsHP4vN/3nV1wTWzbmfb7ujaDb9fPscf+rx0J3nkj4+827/yHd2xsub75rlDA6u9qWnG16/uPdkTXblvoOpCI2k5e+6ZCcqlJ95560LyoGdQe3g4jX8BBi4dDHQOAAA=',
+    'marketplaceId' => 'EBAY-US'
+    ,'debug' => false
+    ,'httpOptions' => [
+        'debug' => false
+    ]
+    ,'sandbox' => true
 ]);
 
-$response = $service->search([
+$response = $service->getItem([
     'params' => [
-        'filter' => 'price:[10..50]',
-        'limit'  => '50',
-        'offset' => '1',
-        'q'      => 'Harry Potter',
-        'sort'   => 'price'
+        'item_id' => 'v1|110184641811|410080469816'
     ]
 ]);
+echo $response->title."\n";
 
-foreach ($response->itemSummaries as $itemSummary) {
-    printf("Item Id [%s]\n", $itemSummary->itemId);
+/*
+$response = $service->getItemFeed([
+    'params' => [
+        'category_id' => '15032',
+        'date' => '20161021',
+        'feed_type' => 'DAILY'
+    ]
+]);
+*/
+/*
+$response = $service->getItemGroup([
+    'params' => [
+        'item_group_id' => '110184960600'
+    ]
+]);
+foreach ($response->items as $item) {
+    printf("[%s] %s\n", $item->itemId, $item->title);
 }
+*/
+/*
+$response = $service->searchForItems([
+    'params' => [
+        'q'      => 'phone'
+    ]
+]);
+foreach ($response->itemSummaries as $itemSummary) {
+    printf("[%s] %s\n", $item->itemId, $item->title);
+}
+ */

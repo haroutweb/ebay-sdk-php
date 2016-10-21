@@ -13,11 +13,35 @@ class BrowseService extends \DTS\eBaySDK\Browse\Services\BrowseBaseService
         parent::__construct($config);
     }
 
+    /**
+     * @param array $request {
+     *     Associative array of request data.
+     *
+     *     @type array $params {
+     *         Associative array of URI parameters.
+     *
+     *         @type string $item_id
+     *     }
+     * }
+     * @return \DTS\eBaySDK\Browse\Types\Item
+     */
     public function getItem(array $request)
     {
         return $this->getItemAsync($request)->wait();
     }
 
+    /**
+     * @param array $request {
+     *     Associative array of request data.
+     *
+     *     @type array $params {
+     *         Associative array of URI parameters.
+     *
+     *         @type string $item_id
+     *     }
+     * }
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
     public function getItemAsync(array$request)
     {
         return $this->callOperationAsync(
@@ -29,15 +53,131 @@ class BrowseService extends \DTS\eBaySDK\Browse\Services\BrowseBaseService
         );
     }
 
-    public function search(array $request)
+    /**
+     * @param array $request {
+     *     Associative array of request data.
+     *
+     *     @type array $params {
+     *         Associative array of URI parameters.
+     *
+     *         @type string $category_id
+     *         @type string $date
+     *         @type string $feed_type
+     *     }
+     * }
+     * @return \DTS\eBaySDK\Browse\Types\ItemFeedResponse
+     */
+    public function getItemFeed(array $request)
     {
-        return $this->searchAsync($request)->wait();
+        return $this->getItemFeedAsync($request)->wait();
     }
 
-    public function searchAsync(array$request)
+    /**
+     * @param array $request {
+     *     Associative array of request data.
+     *
+     *     @type array $params {
+     *         Associative array of URI parameters.
+     *
+     *         @type string $category_id
+     *         @type string $date
+     *         @type string $feed_type
+     *     }
+     * }
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getItemFeedAsync(array $request)
     {
         return $this->callOperationAsync(
-            'search',
+            'getItemFeed',
+            'GET',
+            'item_feed',
+            $request,
+            '\DTS\eBaySDK\Browse\Types\ItemFeedResponse'
+        );
+    }
+
+    /**
+     * @param array $request {
+     *     Associative array of request data.
+     *
+     *     @type array $params {
+     *         Associative array of URI parameters.
+     *
+     *         @type string $item_group_id
+     *     }
+     * }
+     * @return \DTS\eBaySDK\Browse\Types\ItemGroup
+     */
+    public function getItemGroup(array $request)
+    {
+        return $this->getItemGroupAsync($request)->wait();
+    }
+
+    /**
+     * @param array $request {
+     *     Associative array of request data.
+     *
+     *     @type array $params {
+     *         Associative array of URI parameters.
+     *
+     *         @type string $item_group_id
+     *     }
+     * }
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getItemGroupAsync(array $request)
+    {
+        return $this->callOperationAsync(
+            'getItemGroup',
+            'GET',
+            'item_group/{item_group_id}',
+            $request,
+            '\DTS\eBaySDK\Browse\Types\ItemGroup'
+        );
+    }
+
+    /**
+     * @param array $request {
+     *     Associative array of request data.
+     *
+     *     @type array $params {
+     *         Associative array of URI parameters.
+     *
+     *         @type string $filter
+     *         @type string $limit
+     *         @type string $offset
+     *         @type string $q
+     *         @type string $sort
+     *     }
+     * }
+     * @return \DTS\eBaySDK\Browse\Types\SearchPagedCollection
+     */
+    public function searchForItems(array $request)
+    {
+        return $this->searchForItemsAsync($request)->wait();
+    }
+
+    /**
+     * @param array $request {
+     *     Associative array of request data.
+     *
+     *     @type array $params {
+     *         Associative array of URI parameters.
+     *
+     *         @type string $filter
+     *         @type string $limit
+     *         @type string $offset
+     *         @type string $q
+     *         @type string $sort
+     *     }
+     * }
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function searchForItemsAsync(array$request)
+    {
+        return $this->callOperationAsync(
+            'searchForItems',
             'GET',
             'item_summary/search',
             $request,

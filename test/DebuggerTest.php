@@ -32,6 +32,7 @@ X-EBAY-API-APP-NAME: appname
 X-EBAY-API-CERT-NAME: certname
 X-EBAY-API-DEV-NAME: devname
 <eBayAuthToken> authtoken </eBayAuthToken>
+Authorization: authorization
 EOT;
 
         $str = '';
@@ -53,6 +54,7 @@ EOT;
         $this->assertNotContains('certname', $str);
         $this->assertNotContains('devname', $str);
         $this->assertNotContains('authtoken', $str);
+        $this->assertNotContains('authorization', $str);
     }
 
     public function testScrubsCustom()

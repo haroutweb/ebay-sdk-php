@@ -18,7 +18,8 @@ abstract class BaseRestService
     /**
      * Constants for the various HTTP headers required by the API.
      */
-    const HDR_AUTHORIZATION = 'Authorization';
+    const HDR_REQUEST_LANGUAGE = 'Content-Language';
+    const HDR_RESPONSE_LANGUAGE = 'Accept-Language';
 
     /**
      * @var DTS\eBaySDK\ConfigurationResolver Resolves configuration options.
@@ -87,6 +88,12 @@ abstract class BaseRestService
                 'valid'   => ['array'],
                 'default' => []
             ],
+            'requestLanguage' => [
+                'valid' => ['string']
+            ],
+            'responseLanguage' => [
+                'valid' => ['string']
+            ],
             'sandbox' => [
                 'valid'   => ['bool'],
                 'default' => false
@@ -133,8 +140,13 @@ abstract class BaseRestService
      */
     protected function callOperationAsync($name, $method, $resource, array $request, $responseClass)
     {
-        $url = 'https://api.sandbox.ebay.com/buy/browse/v1/item_summary/search?q=phone&limit=50&offset=50';
-        $url = $this->uriResolver->resolve($name, $this->getUrl(), $this->getConfig('apiVersion'), $resource, $request['params']);
+        $url = $this->uriResolver->resolve(
+            $name,
+            $this->getUrl(),
+            $this->getConfig('apiVersion'),
+            $resource,
+            array_key_exists('params', $request) ? $request['params'] : []
+        );
         $body = $this->buildRequestBody($request);
         $headers = $this->buildRequestHeaders($request, $body);
         $debug = $this->getConfig('debug');
@@ -177,7 +189,7 @@ abstract class BaseRestService
     private function buildRequestBody(array $request)
     {
         return array_key_exists('body', $request)
-            ? $request['body']
+            ? json_encode($request['body']->toArray())
             : '';
     }
 
@@ -193,10 +205,18 @@ abstract class BaseRestService
     {
         $headers = $this->getEbayHeaders();
 
-        $headers[self::HDR_AUTHORIZATION] = 'Bearer '.$this->getConfig('authorization');
         $headers['Accept'] = 'application/json';
         $headers['Content-Type'] = 'application/json';
         $headers['Content-Length'] = strlen($body);
+
+        // Add optional headers.
+        if ($this->getConfig('requestLanguage')) {
+            $headers[self::HDR_REQUEST_LANGUAGE] = $this->getConfig('requestLanguage');
+        }
+
+        if ($this->getConfig('responseLanguage')) {
+            $headers[self::HDR_RESPONSE_LANGUAGE] = $this->getConfig('responseLanguage');
+        }
 
         return $headers;
     }

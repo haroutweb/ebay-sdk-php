@@ -9,6 +9,7 @@ class BrowseBaseService extends \DTS\eBaySDK\Services\BaseRestService
     /**
      * Constants for the various HTTP headers required by the API.
      */
+    const HDR_AUTHORIZATION = 'Authorization';
     const HDR_MARKETPLACE_ID = 'X-EBAY-C-MARKETPLACE-ID';
 
     /**
@@ -49,7 +50,27 @@ class BrowseBaseService extends \DTS\eBaySDK\Services\BaseRestService
                     'required' => true
                 ]
             ],
-            'search' => [
+            'getItemFeed' => [
+                'category_id' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ],
+                'date' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ],
+                'feed_type' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
+            ],
+            'getItemGroup' => [
+                'item_group_id' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
+            ],
+            'searchForItems' => [
                 'filter' => [
                     'valid' => ['string']
                 ],
@@ -77,6 +98,9 @@ class BrowseBaseService extends \DTS\eBaySDK\Services\BaseRestService
     protected function getEbayHeaders()
     {
         $headers = [];
+
+        // Add required headers first.
+        $headers[self::HDR_AUTHORIZATION] = 'Bearer '.$this->getConfig('authorization');
 
         // Add optional headers.
         if ($this->getConfig('marketplaceId')) {

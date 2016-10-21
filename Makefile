@@ -79,6 +79,10 @@ release: check_tag package
 # Tags the repo and publishes a release.
 full_release: tag release
 
+sync_browse:
+	rsync -rtvu --delete --exclude *Service.php ../ebay-api-sdk-php/dist/Browse/src/Browse/ src/Browse/
+	rsync -rtvu --delete --exclude /Mocks/ --exclude /Services/ ../ebay-api-sdk-php/dist/Browse/test/Browse/ test/Browse/
+
 sync_bulk:
 	rsync -rtvu --delete --exclude *BaseService.php ../ebay-api-sdk-php/dist/BulkDataExchange/src/BulkDataExchange/ src/BulkDataExchange/
 	rsync -rtvu --delete --exclude /Mocks/ --exclude /Services/ ../ebay-api-sdk-php/dist/BulkDataExchange/test/BulkDataExchange/ test/BulkDataExchange/

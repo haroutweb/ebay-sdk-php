@@ -34,8 +34,8 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(
-            $r->resolve('test', 'https://example.com', 'v1', 'item'),
-            'https://example.com/v1/item?array=foo%2Cbar&bool=true&callable=-1&int=-1&string=foo'
+            'https://example.com/v1/item?array=foo%2Cbar&bool=true&callable=-1&int=-1&string=foo',
+            $r->resolve('test', 'https://example.com', 'v1', 'item')
         );
     }
 
@@ -184,8 +184,8 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
             'string' => 'foo'
         ];
         $this->assertEquals(
-            $r->resolve('test', 'https://example.com', 'v1', 'item', $params),
-            'https://example.com/v1/item?array=&bool=true&callable=&int=1&string=foo'
+            'https://example.com/v1/item?array=&bool=true&callable=&int=1&string=foo',
+            $r->resolve('test', 'https://example.com', 'v1', 'item', $params)
         );
     }
 
@@ -200,8 +200,53 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
             ]
         ]);
         $this->assertEquals(
-            $r->resolve('test', 'https://example.com', 'v1', 'item', ['foo' => 1]),
-            'https://example.com/v1/item?foo=3'
+            'https://example.com/v1/item?foo=3',
+            $r->resolve('test', 'https://example.com', 'v1', 'item', ['foo' => 1])
         );
+    }
+
+    public function testFillsInPathParameters()
+    {
+        $r = new UriResolver([
+            'test' => [
+                'path1' => [
+                    'valid' => ['string']
+                ],
+                'path2' => [
+                    'valid' => ['string']
+                ],
+                'param1' => [
+                    'valid' => ['string']
+                ],
+                'param2' => [
+                    'valid' => ['string']
+                ]
+            ]
+        ]);
+        $this->assertEquals(
+            'https://example.com/v1/item/foo/bar?param1=baz&param2=shaz',
+            $r->resolve('test', 'https://example.com', 'v1', 'item/{path1}/{path2}', [
+                'path1' => 'foo',
+                'path2' => 'bar',
+                'param1' => 'baz',
+                'param2' => 'shaz'
+            ])
+        );
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Unknown uri parameter "bar" provided
+     */
+    public function testParamMustExist()
+    {
+        $r = new UriResolver([
+            'test' => [
+                'foo' => [
+                    'valid' => ['string']
+                ]
+            ]
+        ]);
+        $r->resolve('test', 'https://example.com', 'v1', 'item', ['bar' => -1]);
     }
 }

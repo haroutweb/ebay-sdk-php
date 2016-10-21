@@ -10,6 +10,7 @@ class SdkTest extends \PHPUnit_Framework_TestCase
         $this->sdk = new Sdk([
             'apiVersion' => '',
             'appId' => '',
+            'authorization' => '',
             'authToken' => '',
             'credentials' => ['appId' => '', 'certId' => '', 'devId' => ''],
             'globalId' => '',
@@ -59,6 +60,11 @@ class SdkTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\BadMethodCallException', 'Unknown method: foo');
 
         $this->sdk->foo();
+    }
+
+    public function testCanCreateBrowse()
+    {
+        $this->assertInstanceOf('\DTS\eBaySDK\Browse\Services\BrowseService', $this->sdk->createBrowse());
     }
 
     public function testCanCreateBulkDataExchange()

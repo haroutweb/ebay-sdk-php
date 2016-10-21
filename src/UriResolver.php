@@ -44,6 +44,12 @@ class UriResolver
             throw new \InvalidArgumentException("Unable to resolve uri parameters for $operation");
         }
 
+        foreach ($parameters as $param => $value) {
+            if (!array_key_exists($param, $this->definitions[$operation])) {
+                throw new \InvalidArgumentException("Unknown uri parameter \"$param\" provided");
+            }
+        }
+
         foreach ($this->definitions[$operation] as $key => $def) {
             if (!isset($parameters[$key])) {
                 if (isset($def['default'])) {
@@ -64,7 +70,7 @@ class UriResolver
             }
         }
 
-        return $uri.'/'.$version.'/'.$resource.$this->queryParameters($parameters);
+        return $uri.'/'.$version.'/'.$this->fillPathParams($resource, $parameters).$this->queryParameters($parameters);
     }
 
     private function checkType($valid, $name, $provided)
@@ -107,6 +113,20 @@ class UriResolver
         $msg = "Missing required uri parameters: \n\n";
         $msg .= implode("\n\n", $missing);
         throw new \InvalidArgumentException($msg);
+    }
+
+    private function fillPathParams($uri, &$params)
+    {
+        return preg_replace_callback('/{(\S+)}/U', function ($matches) use (&$params) {
+            $path = $matches[1];
+            if (array_key_exists($path, $params)) {
+                $value = $params[$path];
+                unset($params[$path]);
+            } else {
+                $value = $path;
+            }
+            return $value;
+        }, $uri);
     }
 
     private function queryParameters($parameters)

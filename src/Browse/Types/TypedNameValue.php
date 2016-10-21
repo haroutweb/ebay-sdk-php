@@ -11,7 +11,7 @@ namespace DTS\eBaySDK\Browse\Types;
  *
  * @property string $name
  * @property \DTS\eBaySDK\Browse\Enums\ValueTypeEnum $type
- * @property \DTS\eBaySDK\Browse\Types\Any $value
+ * @property string $value
  */
 class TypedNameValue extends \DTS\eBaySDK\Types\BaseType
 {
@@ -32,7 +32,7 @@ class TypedNameValue extends \DTS\eBaySDK\Types\BaseType
             'elementName' => 'type'
         ],
         'value' => [
-            'type' => 'DTS\eBaySDK\Browse\Types\Any',
+            'type' => 'string',
             'repeatable' => false,
             'attribute' => false,
             'elementName' => 'value'
