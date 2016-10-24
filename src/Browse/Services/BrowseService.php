@@ -44,13 +44,7 @@ class BrowseService extends \DTS\eBaySDK\Browse\Services\BrowseBaseService
      */
     public function getItemAsync(array$request)
     {
-        return $this->callOperationAsync(
-            'getItem',
-            'GET',
-            'item/{item_id}',
-            $request,
-            '\DTS\eBaySDK\Browse\Types\Item'
-        );
+        return $this->callOperationAsync('getItem', $request);
     }
 
     /**
@@ -88,13 +82,7 @@ class BrowseService extends \DTS\eBaySDK\Browse\Services\BrowseBaseService
      */
     public function getItemFeedAsync(array $request)
     {
-        return $this->callOperationAsync(
-            'getItemFeed',
-            'GET',
-            'item_feed',
-            $request,
-            '\DTS\eBaySDK\Browse\Types\ItemFeedResponse'
-        );
+        return $this->callOperationAsync('getItemFeed', $request);
     }
 
     /**
@@ -128,13 +116,7 @@ class BrowseService extends \DTS\eBaySDK\Browse\Services\BrowseBaseService
      */
     public function getItemGroupAsync(array $request)
     {
-        return $this->callOperationAsync(
-            'getItemGroup',
-            'GET',
-            'item_group/{item_group_id}',
-            $request,
-            '\DTS\eBaySDK\Browse\Types\ItemGroup'
-        );
+        return $this->callOperationAsync('getItemGroup', $request);
     }
 
     /**
@@ -176,12 +158,6 @@ class BrowseService extends \DTS\eBaySDK\Browse\Services\BrowseBaseService
      */
     public function searchForItemsAsync(array$request)
     {
-        return $this->callOperationAsync(
-            'searchForItems',
-            'GET',
-            'item_summary/search',
-            $request,
-            '\DTS\eBaySDK\Browse\Types\SearchPagedCollection'
-        );
+        return $this->callOperationAsync('searchForItems', $request);
     }
 }

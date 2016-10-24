@@ -57,7 +57,7 @@ abstract class BaseRestService
         array $config
     ) {
         $this->resolver = new ConfigurationResolver(static::getConfigDefinitions());
-        $this->uriResolver = new UriResolver(static::getParameterDefinitions());
+        $this->uriResolver = new UriResolver(static::$operations);
         $this->config = $this->resolver->resolve($config);
         $this->productionUrl = $productionUrl;
         $this->sandboxUrl = $sandboxUrl;
@@ -134,12 +134,16 @@ abstract class BaseRestService
     /**
      * Sends an asynchronous API request.
      *
-     * @param string The name of the PHP class that will be created from the XML response.
+     * @param string $name The of the operation.
+     * @param array $request The request data.
      *
      * @return \GuzzleHttp\Promise\PromiseInterface A promise that will be resolved with an object created from the XML response.
      */
-    protected function callOperationAsync($name, $method, $resource, array $request, $responseClass)
+    protected function callOperationAsync($name, array $request)
     {
+        $method = static::$operations[$name]['method'];
+        $resource = static::$operations[$name]['resource'];
+        $responseClass = static::$operations[$name]['responseClass'];
         $url = $this->uriResolver->resolve(
             $name,
             $this->getUrl(),

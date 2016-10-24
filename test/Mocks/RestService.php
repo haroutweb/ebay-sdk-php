@@ -3,16 +3,19 @@ namespace DTS\eBaySDK\Test\Mocks;
 
 class RestService extends \DTS\eBaySDK\Test\Mocks\BaseRestService
 {
-    public function __construct(array $config)
-    {
-        parent::__construct($config);
-    }
-
-    public static function getParameterDefinitions()
-    {
-        return [
-            'foo' => [],
-            'bar' => [
+    public static $operations =  [
+        'foo' => [
+            'method' => 'GET',
+            'resource' => '',
+            'responseClass' => '\DTS\eBaySDK\Test\Mocks\ComplexClass',
+            'params' => [
+            ]
+        ],
+        'bar' => [
+            'method' => 'POST',
+            'resource' => '{foo}',
+            'responseClass' => '\DTS\eBaySDK\Test\Mocks\ComplexClass',
+            'params' => [
                 'foo' => [
                     'valid' => ['string'],
                     'required' => true
@@ -21,30 +24,22 @@ class RestService extends \DTS\eBaySDK\Test\Mocks\BaseRestService
                     'valid' => ['string'],
                     'required' => true
                 ]
-            ],
-        ];
-    }
+            ]
+        ]
+    ];
 
+    public function __construct(array $config)
+    {
+        parent::__construct($config);
+    }
 
     public function foo(array $request)
     {
-        return $this->callOperationAsync(
-            'foo',
-            'GET',
-            '',
-            $request,
-            '\DTS\eBaySDK\Test\Mocks\ComplexClass'
-        )->wait();
+        return $this->callOperationAsync('foo', $request)->wait();
     }
 
     public function bar(array $request)
     {
-        return $this->callOperationAsync(
-            'bar',
-            'POST',
-            '{foo}',
-            $request,
-            '\DTS\eBaySDK\Test\Mocks\ComplexClass'
-        )->wait();
+        return $this->callOperationAsync('bar', $request)->wait();
     }
 }

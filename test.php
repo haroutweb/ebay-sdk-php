@@ -2,12 +2,11 @@
 require __DIR__.'/vendor/autoload.php';
 
 use \DTS\eBaySDK\Constants;
-use \DTS\eBaySDK\Browse\Services;
-use \DTS\eBaySDK\Browse\Types;
-use \DTS\eBaySDK\Browse\Enums;
+use \DTS\eBaySDK\Browse;
+use \DTS\eBaySDK\PostOrder;
 
-$service = new Services\BrowseService([
-    'authorization' => 'v^1.1#i^1#f^0#p^1#I^3#r^0#t^H4sIAAAAAAAAAOVXa2wUVRTu9kUQ8YEGoUCyGQSkZWbv7O7sY8JuskshLelLdqm0hMedmTtl6O7MOPcO7daItQrGCGgw/iLGgqBoQn9AgkjURDQR+AHBiAnKDxGMhKQ0PgjiD/XOdCnbSijCakicP5N7zrnnfuc759yZA3orJ1Zvrtt8dbJnQml/L+gt9Xj4SWBiZUXNA2WlVRUloMDA09/7eG95X9nFhRhmM6a4DGHT0DHydmczOhZdYYyxLV00INawqMMswiKRxVSisUH0c0A0LYMYspFhvPW1MUbgFT+UQFgK8JGIHKZC/brLtBFjVCBIIAiQwod4KCg81WNso3odE6iTGOMHfIjlAevn07wgBngRBDkB8O2MtxVZWDN0asIBJu6iFd29VgHUWyOFGCOLUCdMvD6xJNWcqK9d3JRe6CvwFc/TkCKQ2Hj0apGhIG8rzNjo1sdg11pM2bKMMGZ88eETRjsVE9fB3AF8l2lJiAoRWfKH1DBSlXBxqFxiWFlIbo3DkWgKq7qmItKJRnLjMUrZkNYjmeRXTdRFfa3XeT1pw4ymasiKMYuTibZESwsTr4UbNCWdgiyIhBQ2GBJkNiKjMCvBqBCVoRTmhVD+kGFPeYrHnLLI0BXNIQx7mwySRBQxGsuLv4AXatSsN1sJlThoCu3Cef6CQdDuJHQ4gzZZpzs5RVlKgtddjs/+yG5CLE2yCRrxMFbh0hNjoGlqCjNW6dZhvnS6cYxZR4gp+nxdXV1cV4AzrA6fHwDet6KxISWvQ1nIXLd1eh1r429gNTcUGdGdWBNJzqRYummdUgB6BxMPR0KBSJ720ajiY6V/ExSE7BvdDMVqjiASkF9SI4ISAYpf9RejOeL5+vQ5OJAEc2wWWp2ImBkoI1amZWZnkaUpYkBQ/YGIilglFFXZYFRVWUlQ6HkqQgAhSZKjkf9Lj9xulS/KaFSZplVWvFIvRpnXGZgg5Xbr/KahpWTDRC1GRpNz/3FsTq+PE1/AUlqgRXJJO0fXKZTJ0NddhSu7mVxTzDurGIn8B/1yZ3FrkNxbEfPBcBjQSzoUvLu46D/MPRWXbGQ55/rlLGgSw+IoNDODMGchbNgW/efimp1vcdroRDq93ohlZDLIauXvigXsNPG9xYOzH1MH0NQoH+XPD1BKKDc+A9LoHekaF7R3tN3NjXySneM6bIQJBaIg61/4sPtGDxjxEvfh+zwfgz7Ph3RGAWHA8jVgfmXZ8vKy+xmsEURzqyuS0c1pUOWw1qHTH2gLcZ0oZ0LNKq30NJ7f0vZcwWjTvwpMGxluJpbxkwomHTDzhqaCf/CxyXQGAX6eFwI8CLaD2Te05fzU8kd7Jv00a9acPYltp16e90bP5aOHKuBGMHnEyOOpKCnv85TA/TWrFlTvON/5ibVRmxH9bfX5148PnQZDPWdW5E5NGXpq8FJi/4HqHdOPz1sqHJ5xpAIe/DZypneq/lKq/8S0K5GTg/1d323a3bev2fp064wXZh8h2/cduzj/xe41vy59eu03p++rmtIebThx8ANjwYGaK++WvRb8Zb1/efeeY2fb5iz7YdMrX25vejtW9ePg+8/Gd/15UWtdXv3eF+GHBqa37T0G571pJM+lrw0e3ZY8cHxuZ93qLYfb7JnJhsHP4vN/3nV1wTWzbmfb7ujaDb9fPscf+rx0J3nkj4+827/yHd2xsub75rlDA6u9qWnG16/uPdkTXblvoOpCI2k5e+6ZCcqlJ95560LyoGdQe3g4jX8BBi4dDHQOAAA=',
+$service = new Browse\Services\BrowseService([
+    'authorization' => 'v^1.1#i^1#I^3#p^1#r^0#f^0#t^H4sIAAAAAAAAAOVXXWwUVRTudttCqUgkQkmVsBlE+ZvZO7M7+zNhN24phcpPV3fblEZC7szcaYfOzmzm3rHdPmApCiRqSPyJIiYWiLEqiIYEKIYHEk1IDEF4IDEYpBLFgPogAR8KxrvbpexWQhFWQ+K8TO455577ne+cc39AX1X1wi0rtvwx1TWpfKAP9JW7XHwNqK6qXPSwu7yusgwUGLgG+p7oq+h3/7wEw5SRlp5DOG2ZGHl6UoaJpZwwwji2KVkQ61gyYQphiShSIrZ6lSRwQErbFrEUy2A8TQ0Rhke+MICqElIVv6YGVSo1b/pMWhFGBmHNp/gFDSAxjDRI9Rg7qMnEBJokwgiAD7A8YAV/khclIEggzAF/qJ3xtCIb65ZJTTjARHNwpdxcuwDrnaFCjJFNqBMm2hRrTDTHmhqWrUku8Rb4iuZ5SBBIHFw8WmqpyNMKDQfdeRmcs5YSjqIgjBlvdHSFYqdS7CaYe4Cfo9oX9GmiImuyH0DRHyoJk42WnYLkzjCyEl1ltZyphEyik8xEhFIy5A1IIfnRGuqiqcGT/T3rQEPXdGRHmGX1sbWxeJyJNsAXdDWZgCwIBVTWHxAVNqSgICvDsBhWoBzkxUB+kVFPeYbHrbLUMlU9yxf2rLFIPaKIUTEvfkks4IUaNZvNdkwjWTSFdsGb/Al8ezafowl0SKeZTSlKURI8ueHE7I/NJsTWZYegMQ/jFTl6IgxMp3WVGa/MlWG+cnpwhOkkJC15vd3d3Vy3j7PsDq8AAO9tW70qoXSiFO2zvG2217E+8QRWz4WiIDoT6xLJpCmWHlqmFIDZwUSDoYAvlKe9GFV0vPRvgoKQvcW9UKre8MvQr2pBEQnIzwugJNtMNF+f3iwOJMMMm4J2FyJpAyqIVWiZOSlk66rkEzXBF9IQqwbCGusPaxoriypdT0MIICTLSjj0f+mRu63ypYZOlUlaZaUr9VKU+QoLE6TebZ3fNrSEYqVR3DJ0JfMfx5bt9Qni89lqHNokU+9k6DiBDIP+7itcJZfJ9aXcs0qRyH/QL/cWtw7JgxUx7w8GfQLvE8L3Fxe9wjxQcSlWistuv5wN08SyOQotbSDM2Qhbjk2vXFxz9ixOWl3IpNsbsS3DQHYrf18s4GwTP1g8ZOdj6gCmdcpHxaZPKSWUG68FafRZ6focaE+x3e2NvLKT4TochAkFoiL7XzjYvcUPjGhZ7uP7XUdBv2uIvlFAELD8IrCgyt1S4X6IwTpBNLemKls9nA41DusdJr0/24jrQpk01O3yKtfqC6+ufbHgaTOwDswae9xUu/magpcOePyWppKfVjuVD/BA8PMiEEC4Hcy9pa3gZ1Y8SkTxTO/I9w3TXh4c3hQZnjQ0fV0tmDpm5HJVllX0u8qEw8/0PDkybc65z8xHIi+9M3DgxJWPT33wHZ6VronP7OyY/euRI7uu9V6X43XOgr3sD/D4/BmDx/WrG4IHw/N7zxybc5btYhPnwidmnNvxTfuCE0/1Xpa2H/2q98Yb+08vPnzJe2z5xY0zvXtH9hw6GWoTYltryg1f3Wvv1a7a+KO19sJg5nd345XplSN7d18+GTzf9vYXv226foNdeXbK+h2T9xxa+dG7B+KR3UPbNn/SYrdsm7u1dtfrJ4dPBSPuq5c+HA5cm/786cnLl79yYN4vs/et+3q7aR38PFy34c/Ysnmx+vffSk7pr3QvjAnbdrZV//T0wIV9u45dPL9/aHDe4i+/7Zv15pKW1sd2ujaPpvEv6hHfrHQOAAA=',
     'marketplaceId' => 'EBAY-US'
     ,'debug' => false
     ,'httpOptions' => [
@@ -16,39 +15,55 @@ $service = new Services\BrowseService([
     ,'sandbox' => true
 ]);
 
-$response = $service->getItem([
-    'params' => [
-        'item_id' => 'v1|110184641811|410080469816'
-    ]
-]);
-echo $response->title."\n";
+if (0) {
+    $response = $service->getItem([
+        'params' => [
+            'item_id' => 'v1|110184641811|410080469816'
+        ]
+    ]);
+    echo $response->title."\n";
+}
 
-/*
-$response = $service->getItemFeed([
-    'params' => [
-        'category_id' => '15032',
-        'date' => '20161021',
-        'feed_type' => 'DAILY'
-    ]
-]);
-*/
-/*
-$response = $service->getItemGroup([
-    'params' => [
-        'item_group_id' => '110184960600'
-    ]
-]);
-foreach ($response->items as $item) {
-    printf("[%s] %s\n", $item->itemId, $item->title);
+if (0) {
+    $response = $service->getItemFeed([
+        'params' => [
+            'category_id' => '15032',
+            'date' => '20161021',
+            'feed_type' => 'DAILY'
+        ]
+    ]);
 }
-*/
-/*
-$response = $service->searchForItems([
-    'params' => [
-        'q'      => 'phone'
-    ]
-]);
-foreach ($response->itemSummaries as $itemSummary) {
-    printf("[%s] %s\n", $item->itemId, $item->title);
+if (0) {
+    $response = $service->getItemGroup([
+        'params' => [
+            'item_group_id' => '110184960600'
+        ]
+    ]);
+    foreach ($response->items as $item) {
+        printf("[%s] %s\n", $item->itemId, $item->title);
+    }
 }
- */
+if (0) {
+    $response = $service->searchForItems([
+        'params' => [
+            'q'      => 'phone'
+        ]
+    ]);
+    foreach ($response->itemSummaries as $itemSummary) {
+        printf("[%s] %s\n", $item->itemId, $item->title);
+    }
+}
+
+$service = new PostOrder\Services\PostOrderService([
+    'authorization' => '',
+    'marketplaceId' => 'EBAY-US'
+    ,'debug' => true
+    ,'httpOptions' => [
+        'debug' => false
+    ]
+    ,'sandbox' => true
+]);
+
+$response = $service->searchCancellations([]);
+
+printf("Total %s\n", $response->total);

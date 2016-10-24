@@ -45,12 +45,12 @@ class UriResolver
         }
 
         foreach ($parameters as $param => $value) {
-            if (!array_key_exists($param, $this->definitions[$operation])) {
+            if (!array_key_exists($param, $this->definitions[$operation]['params'])) {
                 throw new \InvalidArgumentException("Unknown uri parameter \"$param\" provided");
             }
         }
 
-        foreach ($this->definitions[$operation] as $key => $def) {
+        foreach ($this->definitions[$operation]['params'] as $key => $def) {
             if (!isset($parameters[$key])) {
                 if (isset($def['default'])) {
                     $parameters[$key] = is_callable($def['default'])
@@ -59,7 +59,7 @@ class UriResolver
                 } elseif (empty($def['required'])) {
                     continue;
                 } else {
-                    $this->throwRequired($parameters);
+                    $this->throwRequired($operation, $parameters);
                 }
             }
 
@@ -96,11 +96,11 @@ class UriResolver
         throw new \InvalidArgumentException($msg);
     }
 
-    private function throwRequired($parameters)
+    private function throwRequired($operation, $parameters)
     {
         $missing = [];
 
-        foreach ($this->definitions as $key => $def) {
+        foreach ($this->definitions[$operation]['params'] as $key => $def) {
             if (empty($def['required'])
                 || isset($def['default'])
                 || array_key_exists($key, $parameters)

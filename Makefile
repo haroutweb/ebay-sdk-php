@@ -109,6 +109,10 @@ sync_merc:
 	rsync -rtvu --delete --exclude MerchantData.php ../ebay-api-sdk-php/dist/MerchantData/src/MerchantData/ src/MerchantData/
 	rsync -rtvu --delete --exclude /Mocks/ --exclude MerchantDataTest.php ../ebay-api-sdk-php/dist/MerchantData/test/MerchantData/ test/MerchantData/
 
+sync_post:
+	rsync -rtvu --delete --exclude *Service.php ../ebay-api-sdk-php/dist/PostOrder/src/PostOrder/ src/PostOrder/
+	rsync -rtvu --delete --exclude /Mocks/ --exclude /Services/ ../ebay-api-sdk-php/dist/PostOrder/test/PostOrder/ test/PostOrder/
+
 sync_res:
 	rsync -rtvu --delete --exclude *BaseService.php ../ebay-api-sdk-php/dist/ResolutionCaseManagement/src/ResolutionCaseManagement/ src/ResolutionCaseManagement/
 	rsync -rtvu --delete --exclude /Mocks/ --exclude /Services/ ../ebay-api-sdk-php/dist/ResolutionCaseManagement/test/ResolutionCaseManagement/ test/ResolutionCaseManagement/

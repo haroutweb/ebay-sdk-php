@@ -10,25 +10,27 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
     {
         $r = new UriResolver([
             'test' => [
-                'array' => [
-                    'valid' => ['array'],
-                    'default' => ['foo', 'bar']
-                ],
-                'bool' => [
-                    'valid' => ['bool'],
-                    'default' => true
-                ],
-                'callable' => [
-                    'valid' => ['int'],
-                    'default' => [StaticMethods::class, 'defaultConfigValue']
-                ],
-                'int' => [
-                    'valid' => ['int'],
-                    'default' => -1
-                ],
-                'string' => [
-                    'valid' => ['string'],
-                    'default' => 'foo'
+                'params' => [
+                    'array' => [
+                        'valid' => ['array'],
+                        'default' => ['foo', 'bar']
+                    ],
+                    'bool' => [
+                        'valid' => ['bool'],
+                        'default' => true
+                    ],
+                    'callable' => [
+                        'valid' => ['int'],
+                        'default' => [StaticMethods::class, 'defaultConfigValue']
+                    ],
+                    'int' => [
+                        'valid' => ['int'],
+                        'default' => -1
+                    ],
+                    'string' => [
+                        'valid' => ['string'],
+                        'default' => 'foo'
+                    ]
                 ]
             ]
         ]);
@@ -47,9 +49,11 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
     {
         $r = new UriResolver([
             'foo' => [
-                'foo' => [
-                    'valid' => ['int'],
-                    'required' => true
+                'params' => [
+                    'foo' => [
+                        'valid' => ['int'],
+                        'required' => true
+                    ]
                 ]
             ]
         ]);
@@ -64,9 +68,11 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
     {
         $r = new UriResolver([
             'test' => [
-                'foo' => [
-                    'valid' => ['int'],
-                    'required' => true
+                'params' => [
+                    'foo' => [
+                        'valid' => ['int'],
+                        'required' => true
+                    ]
                 ]
             ]
         ]);
@@ -81,8 +87,10 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
     {
         $r = new UriResolver([
             'test' => [
-                'foo' => [
-                    'valid' => ['array']
+                'params' => [
+                    'foo' => [
+                        'valid' => ['array']
+                    ]
                 ]
             ]
         ]);
@@ -97,8 +105,10 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
     {
         $r = new UriResolver([
             'test' => [
-                'foo' => [
-                    'valid' => ['bool']
+                'params' => [
+                    'foo' => [
+                        'valid' => ['bool']
+                    ]
                 ]
             ]
         ]);
@@ -113,8 +123,10 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
     {
         $r = new UriResolver([
             'test' => [
-                'foo' => [
-                    'valid' => ['callable']
+                'params' => [
+                    'foo' => [
+                        'valid' => ['callable']
+                    ]
                 ]
             ]
         ]);
@@ -129,8 +141,10 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
     {
         $r = new UriResolver([
             'test' => [
-                'foo' => [
-                    'valid' => ['int']
+                'params' => [
+                    'foo' => [
+                        'valid' => ['int']
+                    ]
                 ]
             ]
         ]);
@@ -145,8 +159,10 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
     {
         $r = new UriResolver([
             'test' => [
-                'foo' => [
-                    'valid' => ['string']
+                'params' => [
+                    'foo' => [
+                        'valid' => ['string']
+                    ]
                 ]
             ]
         ]);
@@ -157,20 +173,22 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
     {
         $r = new UriResolver([
             'test' => [
-                'array' => [
-                    'valid' => ['array']
-                ],
-                'bool' => [
-                    'valid' => ['bool']
-                ],
-                'callable' => [
-                    'valid' => ['callable']
-                ],
-                'int' => [
-                    'valid' => ['int']
-                ],
-                'string' => [
-                    'valid' => ['string']
+                'params' => [
+                    'array' => [
+                        'valid' => ['array']
+                    ],
+                    'bool' => [
+                        'valid' => ['bool']
+                    ],
+                    'callable' => [
+                        'valid' => ['callable']
+                    ],
+                    'int' => [
+                        'valid' => ['int']
+                    ],
+                    'string' => [
+                        'valid' => ['string']
+                    ]
                 ]
             ]
         ]);
@@ -193,9 +211,11 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
     {
         $r = new UriResolver([
             'test' => [
-                'foo' => [
-                    'valid' => ['int'],
-                    'fn' => [StaticMethods::class, 'applyConfigValue']
+                'params' => [
+                    'foo' => [
+                        'valid' => ['int'],
+                        'fn' => [StaticMethods::class, 'applyConfigValue']
+                    ]
                 ]
             ]
         ]);
@@ -209,17 +229,19 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
     {
         $r = new UriResolver([
             'test' => [
-                'path1' => [
-                    'valid' => ['string']
-                ],
-                'path2' => [
-                    'valid' => ['string']
-                ],
-                'param1' => [
-                    'valid' => ['string']
-                ],
-                'param2' => [
-                    'valid' => ['string']
+                'params' => [
+                    'path1' => [
+                        'valid' => ['string']
+                    ],
+                    'path2' => [
+                        'valid' => ['string']
+                    ],
+                    'param1' => [
+                        'valid' => ['string']
+                    ],
+                    'param2' => [
+                        'valid' => ['string']
+                    ]
                 ]
             ]
         ]);
@@ -242,8 +264,10 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
     {
         $r = new UriResolver([
             'test' => [
-                'foo' => [
-                    'valid' => ['string']
+                'params' => [
+                    'foo' => [
+                        'valid' => ['string']
+                    ]
                 ]
             ]
         ]);

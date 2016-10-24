@@ -7,6 +7,75 @@ namespace DTS\eBaySDK\Browse\Services;
 class BrowseBaseService extends \DTS\eBaySDK\Services\BaseRestService
 {
     /**
+     * @property array $operations Associative array of operations provided by the service.
+     */
+    public static $operations = [
+        'getItem' => [
+            'method' => 'GET',
+            'resource' => 'item/{item_id}',
+            'responseClass' => '\DTS\eBaySDK\Browse\Types\Item',
+            'params' => [
+                'item_id' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
+            ]
+        ],
+        'getItemFeed' => [
+            'method' => 'GET',
+            'resource' => 'item_feed',
+            'responseClass' => '\DTS\eBaySDK\Browse\Types\ItemFeedResponse',
+            'params' => [
+                'category_id' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ],
+                'date' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ],
+                'feed_type' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
+            ]
+        ],
+        'getItemGroup' => [
+            'method' => 'GET',
+            'resource' => 'item_group/{item_group_id}',
+            'responseClass' => '\DTS\eBaySDK\Browse\Types\ItemGroup',
+            'params' => [
+                'item_group_id' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
+            ]
+        ],
+        'searchForItems' => [
+            'method' => 'GET',
+            'resource' => 'item_summary/search',
+            'responseClass' => '\DTS\eBaySDK\Browse\Types\SearchPagedCollection',
+            'params' => [
+                'filter' => [
+                    'valid' => ['string']
+                ],
+                'limit' => [
+                    'valid' => ['string']
+                ],
+                'offset' => [
+                    'valid' => ['string']
+                ],
+                'q' => [
+                    'valid' => ['string']
+                ],
+                'sort' => [
+                    'valid' => ['string']
+                ]
+            ]
+        ]
+    ];
+
+    /**
      * Constants for the various HTTP headers required by the API.
      */
     const HDR_AUTHORIZATION = 'Authorization';
@@ -32,60 +101,6 @@ class BrowseBaseService extends \DTS\eBaySDK\Services\BaseRestService
             ],
             'marketplaceId' => [
                 'valid' => ['string']
-            ]
-        ];
-    }
-
-    /**
-     * Get an array of service uri parameter definitions.
-     *
-     * @return array
-     */
-    public static function getParameterDefinitions()
-    {
-        return [
-            'getItem' => [
-                'item_id' => [
-                    'valid' => ['string'],
-                    'required' => true
-                ]
-            ],
-            'getItemFeed' => [
-                'category_id' => [
-                    'valid' => ['string'],
-                    'required' => true
-                ],
-                'date' => [
-                    'valid' => ['string'],
-                    'required' => true
-                ],
-                'feed_type' => [
-                    'valid' => ['string'],
-                    'required' => true
-                ]
-            ],
-            'getItemGroup' => [
-                'item_group_id' => [
-                    'valid' => ['string'],
-                    'required' => true
-                ]
-            ],
-            'searchForItems' => [
-                'filter' => [
-                    'valid' => ['string']
-                ],
-                'limit' => [
-                    'valid' => ['string']
-                ],
-                'offset' => [
-                    'valid' => ['string']
-                ],
-                'q' => [
-                    'valid' => ['string']
-                ],
-                'sort' => [
-                    'valid' => ['string']
-                ]
             ]
         ];
     }

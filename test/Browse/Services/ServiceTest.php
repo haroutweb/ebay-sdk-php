@@ -25,58 +25,78 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         ], $d['marketplaceId']);
     }
 
-    public function testParameterDefinitions()
+    public function testOperationDefinitions()
     {
-        $d = BrowseBaseService::getParameterDefinitions();
+        $d = BrowseBaseService::$operations;
 
         $this->assertArrayHasKey('getItem', $d);
         $this->assertEquals([
-            'item_id' => [
-                'valid' => ['string'],
-                'required' => true
-            ],
+            'method' => 'GET',
+            'resource' => 'item/{item_id}',
+            'responseClass' => '\DTS\eBaySDK\Browse\Types\Item',
+            'params' => [
+                'item_id' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
+            ]
         ], $d['getItem']);
 
         $this->assertArrayHasKey('getItemFeed', $d);
         $this->assertEquals([
-            'category_id' => [
-                'valid' => ['string'],
-                'required' => true
-            ],
-            'date' => [
-                'valid' => ['string'],
-                'required' => true
-            ],
-            'feed_type' => [
-                'valid' => ['string'],
-                'required' => true
+            'method' => 'GET',
+            'resource' => 'item_feed',
+            'responseClass' => '\DTS\eBaySDK\Browse\Types\ItemFeedResponse',
+            'params' => [
+                'category_id' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ],
+                'date' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ],
+                'feed_type' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
             ]
         ], $d['getItemFeed']);
 
         $this->assertArrayHasKey('getItemGroup', $d);
         $this->assertEquals([
-            'item_group_id' => [
-                'valid' => ['string'],
-                'required' => true
+            'method' => 'GET',
+            'resource' => 'item_group/{item_group_id}',
+            'responseClass' => '\DTS\eBaySDK\Browse\Types\ItemGroup',
+            'params' => [
+                'item_group_id' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
             ]
         ], $d['getItemGroup']);
 
         $this->assertArrayHasKey('searchForItems', $d);
         $this->assertEquals([
-            'filter' => [
-                'valid' => ['string']
-            ],
-            'limit' => [
-                'valid' => ['string']
-            ],
-            'offset' => [
-                'valid' => ['string']
-            ],
-            'q' => [
-                'valid' => ['string']
-            ],
-            'sort' => [
-                'valid' => ['string']
+            'method' => 'GET',
+            'resource' => 'item_summary/search',
+            'responseClass' => '\DTS\eBaySDK\Browse\Types\SearchPagedCollection',
+            'params' => [
+                'filter' => [
+                    'valid' => ['string']
+                ],
+                'limit' => [
+                    'valid' => ['string']
+                ],
+                'offset' => [
+                    'valid' => ['string']
+                ],
+                'q' => [
+                    'valid' => ['string']
+                ],
+                'sort' => [
+                    'valid' => ['string']
+                ]
             ]
         ], $d['searchForItems']);
     }
