@@ -170,7 +170,9 @@ abstract class BaseRestService
                     $this->debugResponse($json);
                 }
 
-                return new $responseClass(json_decode($json, true));
+                return $responseClass !== ''
+                    ? new $responseClass(json_decode($json, true))
+                    : null;
             }
         );
     }

@@ -140,6 +140,16 @@ class RestServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\DTS\eBaySDK\Test\Mocks\ComplexClass', $r);
     }
 
+    public function testResponseIsNotReturned()
+    {
+        $s = new RestService([
+            'authorization' => 'xxx',
+            'httpHandler'   => new HttpRestHandler()
+        ]);
+        $r = $s->bar();
+
+        $this->assertEquals(null, $r);
+    }
     public function testDebugging()
     {
         $str = '';

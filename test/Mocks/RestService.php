@@ -10,6 +10,13 @@ class RestService extends \DTS\eBaySDK\Test\Mocks\BaseRestService
             'responseClass' => '\DTS\eBaySDK\Test\Mocks\ComplexClass',
             'params' => [
             ]
+        ],
+        'bar' => [
+            'method' => 'GET',
+            'resource' => '',
+            'responseClass' => '',
+            'params' => [
+            ]
         ]
     ];
 
@@ -21,5 +28,10 @@ class RestService extends \DTS\eBaySDK\Test\Mocks\BaseRestService
     public function foo(array $request = [])
     {
         return $this->callOperationAsync('foo', $request)->wait();
+    }
+
+    public function bar(array $request = [])
+    {
+        return $this->callOperationAsync('bar', $request)->wait();
     }
 }
