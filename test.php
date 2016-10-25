@@ -64,6 +64,6 @@ $service = new PostOrder\Services\PostOrderService([
     ,'sandbox' => true
 ]);
 
-$response = $service->searchCancellations([]);
+$response = $service->searchCancellations();
 
 printf("Total %s\n", $response->total);

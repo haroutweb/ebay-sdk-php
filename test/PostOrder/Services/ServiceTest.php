@@ -25,21 +25,6 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         ], $d['marketplaceId']);
     }
 
-    public function testOperationDefinitions()
-    {
-        $d = PostOrderBaseService::$operations;
-
-        $this->assertArrayHasKey('searchCancellations', $d);
-        $this->assertEquals([
-            'method' => 'GET',
-            'resource' => 'cancellation/search',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types\FindCancelResponse',
-            'params' => [
-            ]
-        ], $d['searchCancellations']);
-
-    }
-
     public function testRequiredEbayHeaders()
     {
         $h = new HttpRestHandler();

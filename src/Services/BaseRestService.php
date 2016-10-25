@@ -37,30 +37,13 @@ abstract class BaseRestService
     private $config;
 
     /**
-     * @var string The production URL for the service.
-     */
-    private $productionUrl;
-
-    /**
-     * @var string The sandbox URL for the service.
-     */
-    private $sandboxUrl;
-
-    /**
-     * @param string $productionUrl The production URL.
-     * @param string $sandboxUrl The sandbox URL.
      * @param array $config Configuration option values.
      */
-    public function __construct(
-        $productionUrl,
-        $sandboxUrl,
-        array $config
-    ) {
+    public function __construct(array $config)
+    {
         $this->resolver = new ConfigurationResolver(static::getConfigDefinitions());
         $this->uriResolver = new UriResolver(static::$operations);
         $this->config = $this->resolver->resolve($config);
-        $this->productionUrl = $productionUrl;
-        $this->sandboxUrl = $sandboxUrl;
     }
 
     /**
@@ -134,10 +117,10 @@ abstract class BaseRestService
     /**
      * Sends an asynchronous API request.
      *
-     * @param string $name The of the operation.
+     * @param string $name The name of the operation.
      * @param array $request The request data.
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface A promise that will be resolved with an object created from the XML response.
+     * @return \GuzzleHttp\Promise\PromiseInterface A promise that will be resolved with an object created from the JSON response or null.
      */
     protected function callOperationAsync($name, array $request)
     {
@@ -184,7 +167,7 @@ abstract class BaseRestService
      */
     private function getUrl()
     {
-        return $this->getConfig('sandbox') ? $this->sandboxUrl : $this->productionUrl;
+        return $this->getConfig('sandbox') ? static::$endPoints['sandbox'] : static::$endPoints['production'];
     }
 
     /**
@@ -239,7 +222,7 @@ abstract class BaseRestService
      *
      * @param string $url API endpoint.
      * @param array  $headers Associative array of HTTP headers.
-     * @param string $body The XML body of the POST request.
+     * @param string $body The JSON body of the request.
       */
     private function debugRequest($url, $headers, $body)
     {
@@ -258,7 +241,7 @@ abstract class BaseRestService
     /**
      * Sends a debug string of the response details.
      *
-     * @param string $body The XML body of the response.
+     * @param string $body The JSON body of the response.
       */
     private function debugResponse($body)
     {

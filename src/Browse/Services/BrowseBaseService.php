@@ -7,9 +7,17 @@ namespace DTS\eBaySDK\Browse\Services;
 class BrowseBaseService extends \DTS\eBaySDK\Services\BaseRestService
 {
     /**
+     * @property array $endPoints The API endpoints.
+     */
+    protected static $endPoints = [
+        'sandbox'    => 'https://api.sandbox.ebay.com/buy/browse',
+        'production' => 'https://api.ebay.com/buy/browse'
+    ];
+
+    /**
      * @property array $operations Associative array of operations provided by the service.
      */
-    public static $operations = [
+    protected static $operations = [
         'getItem' => [
             'method' => 'GET',
             'resource' => 'item/{item_id}',
@@ -86,7 +94,7 @@ class BrowseBaseService extends \DTS\eBaySDK\Services\BaseRestService
      */
     public function __construct(array $config)
     {
-        parent::__construct('https://api.ebay.com/buy/browse', 'https://api.sandbox.ebay.com/buy/browse', $config);
+        parent::__construct($config);
     }
 
     public static function getConfigDefinitions()
