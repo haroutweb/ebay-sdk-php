@@ -3,7 +3,7 @@
   "string": "<h1>Bits &amp; Bobs ©</h1><p>Just some &lt;stuff&gt; I found.&nbsp;&copy;</p>",
   "foo": "foo",
   "double": 123.45,
-  "booleanTrue": TRUE,
+  "booleanTrue": true,
   "booleanFalse": false,
   "DateTime": "2000-01-01T16:15:30.123Z",
   "SimpleClass": {
