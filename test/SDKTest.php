@@ -92,6 +92,11 @@ class SdkTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\DTS\eBaySDK\HalfFinding\Services\HalfFindingService', $this->sdk->createHalfFinding());
     }
 
+    public function testCanCreatePostOrder()
+    {
+        $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Services\PostOrderService', $this->sdk->createPostOrder());
+    }
+
     public function testCanCreateResolutionCaseManagement()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ResolutionCaseManagement\Services\ResolutionCaseManagementService', $this->sdk->createResolutionCaseManagement());

@@ -25,7 +25,7 @@ class BrowseService extends \DTS\eBaySDK\Browse\Services\BrowseBaseService
      * }
      * @return \DTS\eBaySDK\Browse\Types\Item
      */
-    public function getItem(array $request)
+    public function getItem(array $request = [])
     {
         return $this->getItemAsync($request)->wait();
     }
@@ -42,7 +42,7 @@ class BrowseService extends \DTS\eBaySDK\Browse\Services\BrowseBaseService
      * }
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getItemAsync(array$request)
+    public function getItemAsync(array $request = [])
     {
         return $this->callOperationAsync('getItem', $request);
     }
@@ -61,7 +61,7 @@ class BrowseService extends \DTS\eBaySDK\Browse\Services\BrowseBaseService
      * }
      * @return \DTS\eBaySDK\Browse\Types\ItemFeedResponse
      */
-    public function getItemFeed(array $request)
+    public function getItemFeed(array $request = [])
     {
         return $this->getItemFeedAsync($request)->wait();
     }
@@ -80,7 +80,7 @@ class BrowseService extends \DTS\eBaySDK\Browse\Services\BrowseBaseService
      * }
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getItemFeedAsync(array $request)
+    public function getItemFeedAsync(array $request = [])
     {
         return $this->callOperationAsync('getItemFeed', $request);
     }
@@ -97,7 +97,7 @@ class BrowseService extends \DTS\eBaySDK\Browse\Services\BrowseBaseService
      * }
      * @return \DTS\eBaySDK\Browse\Types\ItemGroup
      */
-    public function getItemGroup(array $request)
+    public function getItemGroup(array $request = [])
     {
         return $this->getItemGroupAsync($request)->wait();
     }
@@ -114,7 +114,7 @@ class BrowseService extends \DTS\eBaySDK\Browse\Services\BrowseBaseService
      * }
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getItemGroupAsync(array $request)
+    public function getItemGroupAsync(array $request = [])
     {
         return $this->callOperationAsync('getItemGroup', $request);
     }
@@ -135,7 +135,7 @@ class BrowseService extends \DTS\eBaySDK\Browse\Services\BrowseBaseService
      * }
      * @return \DTS\eBaySDK\Browse\Types\SearchPagedCollection
      */
-    public function searchForItems(array $request)
+    public function searchForItems(array $request = [])
     {
         return $this->searchForItemsAsync($request)->wait();
     }
@@ -156,7 +156,7 @@ class BrowseService extends \DTS\eBaySDK\Browse\Services\BrowseBaseService
      * }
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function searchForItemsAsync(array$request)
+    public function searchForItemsAsync(array $request = [])
     {
         return $this->callOperationAsync('searchForItems', $request);
     }

@@ -24,7 +24,7 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
      * }
      * @return \DTS\eBaySDK\PostOrder\Types\FindCancelResponse
      */
-    public function searchCancellations(array $request)
+    public function searchCancellations(array $request = [])
     {
         return $this->searchCancellationsAsync($request)->wait();
     }
@@ -40,7 +40,7 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
      * }
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function searchCancellationsAsync(array $request)
+    public function searchCancellationsAsync(array $request = [])
     {
         return $this->callOperationAsync('searchCancellations', $request);
     }

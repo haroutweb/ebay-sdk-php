@@ -62,7 +62,7 @@ class RestServiceTest extends \PHPUnit_Framework_TestCase
             'authorization' => 'xxx',
             'httpHandler'   => $h
         ]);
-        $s->foo([]);
+        $s->foo();
 
         $this->assertEquals('http://production.com/v1/', $h->url);
     }
@@ -75,7 +75,7 @@ class RestServiceTest extends \PHPUnit_Framework_TestCase
             'sandbox' => true,
             'httpHandler'   => $h
         ]);
-        $s->foo([]);
+        $s->foo();
 
         $this->assertEquals('http://sandbox.com/v1/', $h->url);
     }
@@ -90,7 +90,7 @@ class RestServiceTest extends \PHPUnit_Framework_TestCase
             'sandbox' => true,
             'httpHandler'   => $h
         ]);
-        $s->foo([]);
+        $s->foo();
 
         $this->assertArrayHasKey('Accept', $h->headers);
         $this->assertEquals('application/json', $h->headers['Accept']);
@@ -117,13 +117,25 @@ class RestServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(json_encode($r->toArray()), $h->body);
     }
 
+    public function testJsonIsNotCreated()
+    {
+        $h = new HttpRestHandler();
+        $s = new RestService([
+            'authorization' => 'xxx',
+            'httpHandler'   => $h
+        ]);
+        $s->foo();
+
+        $this->assertEquals('', $h->body);
+    }
+
     public function testResponseIsReturned()
     {
         $s = new RestService([
             'authorization' => 'xxx',
             'httpHandler'   => new HttpRestHandler()
         ]);
-        $r = $s->foo(['body' => new ComplexClass]);
+        $r = $s->foo();
 
         $this->assertInstanceOf('\DTS\eBaySDK\Test\Mocks\ComplexClass', $r);
     }
