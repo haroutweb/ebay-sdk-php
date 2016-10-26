@@ -177,9 +177,20 @@ abstract class BaseRestService
      */
     private function buildRequestBody(array $request)
     {
-        return array_key_exists('body', $request)
-            ? json_encode($request['body']->toArray())
-            : '';
+        if (!array_key_exists('body', $request)) {
+            return '';
+        }
+
+        $body = $request['body'];
+
+        if (is_string($body)) {
+            // Assume json string but don't validate that it is!
+            return $body;
+        } else if (is_array($body)) {
+            return json_encode($body);
+        } else {
+            return json_encode($body->toArray());
+        }
     }
 
     /**

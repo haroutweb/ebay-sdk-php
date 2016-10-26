@@ -53,17 +53,17 @@ if (0) {
         printf("[%s] %s\n", $item->itemId, $item->title);
     }
 }
+if (0) {
+    $service = new PostOrder\Services\PostOrderService([
+        'authorization' => '',
+        'marketplaceId' => 'EBAY-US'
+        ,'debug' => true
+        ,'httpOptions' => [
+            'debug' => false
+        ]
+        ,'sandbox' => true
+    ]);
 
-$service = new PostOrder\Services\PostOrderService([
-    'authorization' => '',
-    'marketplaceId' => 'EBAY-US'
-    ,'debug' => true
-    ,'httpOptions' => [
-        'debug' => false
-    ]
-    ,'sandbox' => true
-]);
-
-$response = $service->searchCancellations();
-
-printf("Total %s\n", $response->total);
+    $response = $service->searchCancellations();
+    printf("Total %s\n", $response->total);
+}

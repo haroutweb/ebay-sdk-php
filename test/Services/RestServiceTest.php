@@ -117,6 +117,32 @@ class RestServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(json_encode($r->toArray()), $h->body);
     }
 
+    public function testJsonCanBePassed()
+    {
+        $h = new HttpRestHandler();
+        $s = new RestService([
+            'authorization' => 'xxx',
+            'httpHandler'   => $h
+        ]);
+        $json = '{"foo":"bar"}';
+        $s->foo(['body' => $json]);
+
+        $this->assertEquals($json, $h->body);
+    }
+
+    public function testArrayCanBePassed()
+    {
+        $h = new HttpRestHandler();
+        $s = new RestService([
+            'authorization' => 'xxx',
+            'httpHandler'   => $h
+        ]);
+        $array = ['foo' => 'bar'];
+        $s->foo(['body' => $array]);
+
+        $this->assertEquals(json_encode($array), $h->body);
+    }
+
     public function testJsonIsNotCreated()
     {
         $h = new HttpRestHandler();
