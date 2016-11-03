@@ -14,31 +14,32 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
     }
 
     /**
-     * @see submitCancellationRequestAsync() For method parameters.
-     * @return \DTS\eBaySDK\PostOrder\Types\CreateCancelResponse
+     * @see approveCancellationRequestAsync() For method parameters.
      */
-    public function submitCancellationRequest(array $request = [])
+    public function approveCancellationRequest(array $request = [])
     {
-        return $this->submitCancellationRequestAsync($request)->wait();
+        $this->approveCancellationRequestAsync($request)->wait();
     }
 
     /**
-     * Calls the submitCancellationRequest operation.
+     * Calls the approveCancellationRequest operation.
      *
      * The request array structure is:
      *
      * <code>
      * [
-     *     'body' => \DTS\eBaySDK\PostOrder\Types\CreateCancelRequest The request body.
+     *     'params' => [
+     *         'cancelId' => string
+     *     ]
      * ]
      * </code>
      *
      * @param array $request Associative array of the request parameters.
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function submitCancellationRequestAsync(array $request = [])
+    public function approveCancellationRequestAsync(array $request = [])
     {
-        return $this->callOperationAsync('submitCancellationRequest', $request);
+        return $this->callOperationAsync('approveCancellationRequest', $request);
     }
 
     /**
@@ -67,6 +68,98 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
     public function checkCancellationEligibilityAsync(array $request = [])
     {
         return $this->callOperationAsync('checkCancellationEligibility', $request);
+    }
+
+    /**
+     * @see confirmCancellationRefundAsync() For method parameters.
+     */
+    public function confirmCancellationRefund(array $request = [])
+    {
+        $this->confirmCancellationRefundAsync($request)->wait();
+    }
+
+    /**
+     * Calls the confirmCancellationRefund operation.
+     *
+     * The request array structure is:
+     *
+     * <code>
+     * [
+     *     'params' => [
+     *         'cancelId' => string
+     *     ],
+     *     'body'   => \DTS\eBaySDK\PostOrder\Types\ConfirmRefundRequest The request body.
+     * ]
+     * </code>
+     *
+     * @param array $request Associative array of the request parameters.
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function confirmCancellationRefundAsync(array $request = [])
+    {
+        return $this->callOperationAsync('confirmCancellationRefund', $request);
+    }
+
+    /**
+     * @see getCancellationAsync() For method parameters.
+     * @return \DTS\eBaySDK\PostOrder\Types\GetCancelDetailResponse
+     */
+    public function getCancellation(array $request = [])
+    {
+        return $this->getCancellationAsync($request)->wait();
+    }
+
+    /**
+     * Calls the getCancellation operation.
+     *
+     * The request array structure is:
+     *
+     * <code>
+     * [
+     *     'params' => [
+     *         'cancelId'   => string,
+     *         'fieldgroups' => string
+     *     ]
+     * ]
+     * </code>
+     *
+     * @param array $request Associative array of the request parameters.
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getCancellationAsync(array $request = [])
+    {
+        return $this->callOperationAsync('getCancellation', $request);
+    }
+
+
+    /**
+     * @see rejectCancellationRequestAsync() For method parameters.
+     */
+    public function rejectCancellationRequest(array $request = [])
+    {
+        $this->rejectCancellationRequestAsync($request)->wait();
+    }
+
+    /**
+     * Calls the rejectCancellationRequest operation.
+     *
+     * The request array structure is:
+     *
+     * <code>
+     * [
+     *     'params' => [
+     *         'cancelId' => string
+     *     ],
+     *     'body'   => \DTS\eBaySDK\PostOrder\Types\RejectCancelRequest The request body.
+     * ]
+     * </code>
+     *
+     * @param array $request Associative array of the request parameters.
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function rejectCancellationRequestAsync(array $request = [])
+    {
+        return $this->callOperationAsync('rejectCancellationRequest', $request);
     }
 
     /**
@@ -100,7 +193,7 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
      *     ]
      * ]
      *</code>
-
+     *
      * @param array $request Associative array of the request parameters.
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
@@ -110,24 +203,111 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
     }
 
     /**
-     * @see getCancellationAsync() For method parameters.
-     * @return \DTS\eBaySDK\PostOrder\Types\GetCancelDetailResponse
+     * @see submitCancellationRequestAsync() For method parameters.
+     * @return \DTS\eBaySDK\PostOrder\Types\CreateCancelResponse
      */
-    public function getCancellation(array $request = [])
+    public function submitCancellationRequest(array $request = [])
     {
-        return $this->getCancellationAsync($request)->wait();
+        return $this->submitCancellationRequestAsync($request)->wait();
     }
 
     /**
-     * Calls the getCancellation operation.
+     * Calls the submitCancellationRequest operation.
+     *
+     * The request array structure is:
+     *
+     * <code>
+     * [
+     *     'body' => \DTS\eBaySDK\PostOrder\Types\CreateCancelRequest The request body.
+     * ]
+     * </code>
+     *
+     * @param array $request Associative array of the request parameters.
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function submitCancellationRequestAsync(array $request = [])
+    {
+        return $this->callOperationAsync('submitCancellationRequest', $request);
+    }
+
+    /**
+     * @see appealCaseDecisionAsync() For method parameters.
+     */
+    public function appealCaseDecision(array $request = [])
+    {
+        $this->appealCaseDecisionAsync($request)->wait();
+    }
+
+    /**
+     * Calls the appealCaseDecision operation.
      *
      * The request array structure is:
      *
      * <code>
      * [
      *     'params' => [
-     *         'cancel_id'   => string,
-     *         'fieldgroups' => string
+     *         'caseId' => string
+     *     ],
+     *     'body' => \DTS\eBaySDK\PostOrder\Types\AppealRequest The request body.
+     * ]
+     * </code>
+     *
+     * @param array $request Associative array of the request parameters.
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function appealCaseDecisionAsync(array $request = [])
+    {
+        return $this->callOperationAsync('appealCaseDecision', $request);
+    }
+
+    /**
+     * @see closeCaseAsync() For method parameters.
+     */
+    public function closeCase(array $request = [])
+    {
+        return $this->closeCaseAsync($request)->wait();
+    }
+
+    /**
+     * Calls the closeCase operation.
+     *
+     * The request array structure is:
+     *
+     * <code>
+     * [
+     *     'params' => [
+     *         'caseId' => string
+     *     ],
+     *     'body' => \DTS\eBaySDK\PostOrder\Types\BuyerCloseCaseRequest The request body.
+     * ]
+     * </code>
+     *
+     * @param array $request Associative array of the request parameters.
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function closeCaseAsync(array $request = [])
+    {
+        return $this->callOperationAsync('closeCase', $request);
+    }
+
+    /**
+     * @see getCaseAsync() For method parameters.
+     * @return \DTS\eBaySDK\PostOrder\Types\CaseDetailsResponse
+     */
+    public function getCase(array $request = [])
+    {
+        return $this->getCaseAsync($request)->wait();
+    }
+
+    /**
+     * Calls the getCase operation.
+     *
+     * The request array structure is:
+     *
+     * <code>
+     * [
+     *     'params' => [
+     *         'caseId' => string
      *     ]
      * ]
      * </code>
@@ -135,97 +315,8 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
      * @param array $request Associative array of the request parameters.
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCancellationAsync(array $request = [])
+    public function getCaseAsync(array $request = [])
     {
-        return $this->callOperationAsync('getCancellation', $request);
-    }
-
-    /**
-     * @see approveCancellationRequestAsync() For method parameters.
-     */
-    public function approveCancellationRequest(array $request = [])
-    {
-        $this->approveCancellationRequestAsync($request)->wait();
-    }
-
-    /**
-     * Calls the approveCancellationRequest operation.
-     *
-     * The request array structure is:
-     *
-     * <code>
-     * [
-     *     'params' => [
-     *         'cancel_id' => string
-     *     ]
-     * ]
-     * </code>
-     *
-     * @param array $request Associative array of the request parameters.
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function approveCancellationRequestAsync(array $request = [])
-    {
-        return $this->callOperationAsync('approveCancellationRequest', $request);
-    }
-
-    /**
-     * @see confirmCancellationRefundAsync() For method parameters.
-     */
-    public function confirmCancellationRefund(array $request = [])
-    {
-        $this->confirmCancellationRefundAsync($request)->wait();
-    }
-
-    /**
-     * Calls the confirmCancellationRefund operation.
-     *
-     * The request array structure is:
-     *
-     * <code>
-     * [
-     *     'params' => [
-     *         'cancel_id' => string
-     *     ],
-     *     'body'   => \DTS\eBaySDK\PostOrder\Types\ConfirmRefundRequest The request body.
-     * ]
-     * </code>
-     *
-     * @param array $request Associative array of the request parameters.
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function confirmCancellationRefundAsync(array $request = [])
-    {
-        return $this->callOperationAsync('confirmCancellationRefund', $request);
-    }
-
-    /**
-     * @see rejectCancellationRequestAsync() For method parameters.
-     */
-    public function rejectCancellationRequest(array $request = [])
-    {
-        $this->rejectCancellationRequestAsync($request)->wait();
-    }
-
-    /**
-     * Calls the rejectCancellationRequest operation.
-     *
-     * The request array structure is:
-     *
-     * <code>
-     * [
-     *     'params' => [
-     *         'cancel_id' => string
-     *     ],
-     *     'body'   => \DTS\eBaySDK\PostOrder\Types\RejectCancelRequest The request body.
-     * ]
-     * </code>
-     *
-     * @param array $request Associative array of the request parameters.
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function rejectCancellationRequestAsync(array $request = [])
-    {
-        return $this->callOperationAsync('rejectCancellationRequest', $request);
+        return $this->callOperationAsync('getCase', $request);
     }
 }

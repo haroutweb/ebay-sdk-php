@@ -16,9 +16,13 @@ use Psr\Http\Message\ResponseInterface;
 abstract class BaseRestService
 {
     /**
-     * Constants for the various HTTP headers required by the API.
+     * HTTP header constant. Describes the natural language provided in the field values of the request payload.
      */
     const HDR_REQUEST_LANGUAGE = 'Content-Language';
+
+    /**
+     * HTTP header constant. Tells the server the natural language in which the client desires the response.
+     */
     const HDR_RESPONSE_LANGUAGE = 'Accept-Language';
 
     /**

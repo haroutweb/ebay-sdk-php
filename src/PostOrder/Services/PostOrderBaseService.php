@@ -7,7 +7,7 @@ namespace DTS\eBaySDK\PostOrder\Services;
 class PostOrderBaseService extends \DTS\eBaySDK\Services\BaseRestService
 {
     /**
-     * @property array $endPoints The API endpoints.
+     * @var array $endPoints The API endpoints.
      */
     protected static $endPoints = [
         'sandbox'    => 'https://api.sandbox.ebay.com/post-order',
@@ -15,14 +15,18 @@ class PostOrderBaseService extends \DTS\eBaySDK\Services\BaseRestService
     ];
 
     /**
-     * @property array $operations Associative array of operations provided by the service.
+     * @var array $operations Associative array of operations provided by the service.
      */
     protected static $operations = [
-        'submitCancellationRequest' => [
+        'approveCancellationRequest' => [
             'method' => 'POST',
-            'resource' => 'cancellation',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types\CreateCancelResponse',
+            'resource' => 'cancellation/{cancelId}/approve',
+            'responseClass' => '',
             'params' => [
+                'cancelId' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
             ]
         ],
 
@@ -31,6 +35,45 @@ class PostOrderBaseService extends \DTS\eBaySDK\Services\BaseRestService
             'resource' => 'cancellation/check_eligibility',
             'responseClass' => '\DTS\eBaySDK\PostOrder\Types\OrderEligibilityResult',
             'params' => [
+            ]
+        ],
+
+        'confirmCancellationRefund' => [
+            'method' => 'POST',
+            'resource' => 'cancellation/{cancelId}/confirm',
+            'responseClass' => '',
+            'params' => [
+                'cancelId' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
+            ]
+        ],
+
+        'getCancellation' => [
+            'method' => 'GET',
+            'resource' => 'cancellation/{cancelId}',
+            'responseClass' => '\DTS\eBaySDK\PostOrder\Types\GetCancelDetailResponse',
+            'params' => [
+                'cancelId' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ],
+                'fieldgroups' => [
+                    'valid' => ['string']
+                ]
+            ]
+        ],
+
+        'rejectCancellationRequest' => [
+            'method' => 'POST',
+            'resource' => 'cancellation/{cancelId}/reject',
+            'responseClass' => '',
+            'params' => [
+                'cancelId' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
             ]
         ],
 
@@ -75,51 +118,32 @@ class PostOrderBaseService extends \DTS\eBaySDK\Services\BaseRestService
             ]
         ],
 
-        'getCancellation' => [
-            'method' => 'GET',
-            'resource' => 'cancellation/{cancelId}',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types\GetCancelDetailResponse',
+        'submitCancellationRequest' => [
+            'method' => 'POST',
+            'resource' => 'cancellation',
+            'responseClass' => '\DTS\eBaySDK\PostOrder\Types\CreateCancelResponse',
             'params' => [
-                'cancelId' => [
-                    'valid' => ['string'],
-                    'required' => true
-                ],
-                'fieldgroups' => [
-                    'valid' => ['string']
-                ]
             ]
         ],
 
-        'approveCancellationRequest' => [
+        'appealCaseDecision' => [
             'method' => 'POST',
-            'resource' => 'cancellation/{cancelId}/approve',
+            'resource' => 'casemanagement/{caseId}/appeal',
             'responseClass' => '',
             'params' => [
-                'cancelId' => [
+                'caseId' => [
                     'valid' => ['string'],
                     'required' => true
                 ]
             ]
         ],
 
-        'confirmCancellationRefund' => [
+        'closeCase' => [
             'method' => 'POST',
-            'resource' => 'cancellation/{cancelId}/confirm',
+            'resource' => 'casemanagement/{caseId}/close',
             'responseClass' => '',
             'params' => [
-                'cancelId' => [
-                    'valid' => ['string'],
-                    'required' => true
-                ]
-            ]
-        ],
-
-        'rejectCancellationRequest' => [
-            'method' => 'POST',
-            'resource' => 'cancellation/{cancelId}/reject',
-            'responseClass' => '',
-            'params' => [
-                'cancelId' => [
+                'caseId' => [
                     'valid' => ['string'],
                     'required' => true
                 ]
@@ -127,402 +151,26 @@ class PostOrderBaseService extends \DTS\eBaySDK\Services\BaseRestService
         ],
 
         'getCase' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
+            'method' => 'GET',
+            'resource' => 'casemanagement/{caseId}',
+            'responseClass' => '\DTS\eBaySDK\PostOrder\Types\CaseDetailsResponse',
             'params' => [
+                'caseId' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
             ]
         ],
-
-        'appealCaseDecision' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'closeCase' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'issueCaseRefund' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'provideCaseReturnAddress' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'provideCaseShipmentInfo' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'createInquiry' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'checkInquiryEligibility' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'getInquiry' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'closeInquiry' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'confirmInquiryRefund' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'escalateInquiry' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'issueInquiryRefund' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'provideInquiryRefundInfo' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'provideInquiryShipmentInfo' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'sendInquiryMessage' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'createReturnRequest' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'checkReturnEligibility' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'createReturnDraft' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'getReturnDraft' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'updateReturnDraft' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'uploadReturnDraftFile' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        '' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'removeReturnDraftFile' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'getReturnDraftFiles' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'getReturnEstimate' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'getReturnMetadata' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'searchReturnRequests' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'getReturn' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'addShippingLabelInfo' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'cancelReturnRequest' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'checkReturnLabelPrintEligibility' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'processReturnRequest' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'escalateReturn' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'submitReturnFiles' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'uploadReturnFile' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'removeReturnFile' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'getReturnFiles' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'getReturnShippingLabel' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'createBuyerShippingLabel' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'issueReturnRefund' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'markItemReceived' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'markItemSent' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'markReturnRefundReceived' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'markReturnRefundSent' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'sendReturnMessage' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'sendShippingLabel' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'getReturnTrackingInfo' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ],
-
-        'voidShippingLabel' => [
-            'method' => '',
-            'resource' => '',
-            'responseClass' => '\DTS\eBaySDK\PostOrder\Types',
-            'params' => [
-            ]
-        ]
     ];
 
     /**
-     * Constants for the various HTTP headers required by the API.
+     * HTTP header constant. The Authentication Token that is used to validate the caller has permission to access the eBay servers.
      */
     const HDR_AUTHORIZATION = 'Authorization';
+
+    /**
+     * HTTP header constant. The global ID of the eBay site on which the transaction took place.
+     */
     const HDR_MARKETPLACE_ID = 'X-EBAY-C-MARKETPLACE-ID';
 
     /**
