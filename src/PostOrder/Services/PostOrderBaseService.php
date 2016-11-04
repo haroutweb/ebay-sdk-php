@@ -161,6 +161,83 @@ class PostOrderBaseService extends \DTS\eBaySDK\Services\BaseRestService
                 ]
             ]
         ],
+
+        'issueCaseRefund' => [
+            'method' => 'POST',
+            'resource' => 'casemanagement/{caseId}/issue_refund',
+            'responseClass' => '\DTS\eBaySDK\PostOrder\Types\VoluntaryRefundResponse',
+            'params' => [
+                'caseId' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
+            ]
+        ],
+
+        'provideReturnShipmentInfo' => [
+            'method' => 'POST',
+            'resource' => 'casemanagement/{caseId}/provide_shipment_info',
+            'responseClass' => '',
+            'params' => [
+                'caseId' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
+            ]
+        ],
+
+        'provideReturnAddress' => [
+            'method' => 'POST',
+            'resource' => 'casemanagement/{caseId}/provide_return_address',
+            'responseClass' => '',
+            'params' => [
+                'caseId' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
+            ]
+        ],
+
+        'searchCases' => [
+            'method' => 'GET',
+            'resource' => 'casemanagement/search',
+            'responseClass' => '\DTS\eBaySDK\PostOrder\Types\CaseSearchResponse',
+            'params' => [
+                'case_creation_date_range_from' => [
+                    'valid' => ['string']
+                ],
+                'case_creation_date_range_to' => [
+                    'valid' => ['string']
+                ],
+                'case_status_filter' => [
+                    'valid' => ['string']
+                ],
+                'fieldgroups' => [
+                    'valid' => ['string']
+                ],
+                'item_id' => [
+                    'valid' => ['string']
+                ],
+                'limit' => [
+                    'valid' => ['string']
+                ],
+                'offset' => [
+                    'valid' => ['string']
+                ],
+                'order_id' => [
+                    'valid' => ['string']
+                ],
+                'return_id' => [
+                    'valid' => ['string']
+                ],
+                'sort' => [
+                    'valid' => ['string']
+                ],
+                'transaction_id' => [
+                    'valid' => ['string']
+                ]
+            ]
+        ],
     ];
 
     /**
@@ -200,7 +277,7 @@ class PostOrderBaseService extends \DTS\eBaySDK\Services\BaseRestService
     /**
      * Build the needed eBay HTTP headers.
      *
-     * @return array An associative array of eBay http headers.
+     * @return array An associative array of eBay HTTP headers.
      */
     protected function getEbayHeaders()
     {

@@ -15,7 +15,7 @@ use Psr\Http\Message\ResponseInterface;
 abstract class BaseService
 {
     /**
-     * Helper constent when build requests that contain attachments.
+     * Helper constant when build requests that contain attachments.
      */
     const CRLF = "\r\n";
 
@@ -212,7 +212,7 @@ abstract class BaseService
     /**
      * Builds the attachment part of the request body string.
      *
-     * @param array $attachment The attachement
+     * @param array $attachment The attachment
      *
      * @return string The attachment part of request body.
      */
@@ -259,7 +259,7 @@ abstract class BaseService
      * @param string The XML response body.
      *
      * @return array first item is the XML part of response body and the second
-     *               is an attachement if one was present in the API response.
+     *               is an attachment if one was present in the API response.
      */
     private function extractXml($response)
     {

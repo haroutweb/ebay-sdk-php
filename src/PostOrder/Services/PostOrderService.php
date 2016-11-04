@@ -14,7 +14,11 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
     }
 
     /**
+     * Calls the approveCancellationRequest operation.
+     *
      * @see approveCancellationRequestAsync() For method parameters.
+     *
+     * @param array $request Associative array of the request parameters.
      */
     public function approveCancellationRequest(array $request = [])
     {
@@ -43,7 +47,11 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
     }
 
     /**
+     * Calls the checkCancellationEligibility operation.
+     *
      * @see checkCancellationEligibilityAsync() For method parameters.
+     *
+     * @param array $request Associative array of the request parameters.
      * @return \DTS\eBaySDK\PostOrder\Types\OrderEligibilityResult
      */
     public function checkCancellationEligibility(array $request = [])
@@ -71,7 +79,11 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
     }
 
     /**
+     * Calls the confirmCancellationRefund operation.
+     *
      * @see confirmCancellationRefundAsync() For method parameters.
+     *
+     * @param array $request Associative array of the request parameters.
      */
     public function confirmCancellationRefund(array $request = [])
     {
@@ -101,7 +113,11 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
     }
 
     /**
+     * Calls the getCancellation operation.
+     *
      * @see getCancellationAsync() For method parameters.
+     *
+     * @param array $request Associative array of the request parameters.
      * @return \DTS\eBaySDK\PostOrder\Types\GetCancelDetailResponse
      */
     public function getCancellation(array $request = [])
@@ -133,7 +149,11 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
 
 
     /**
+     * Calls the rejectCancellationRequest operation.
+     *
      * @see rejectCancellationRequestAsync() For method parameters.
+     *
+     * @param array $request Associative array of the request parameters.
      */
     public function rejectCancellationRequest(array $request = [])
     {
@@ -163,7 +183,11 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
     }
 
     /**
+     * Calls the searchCancellations operation.
+     *
      * @see searchCancellationsAsync() For method parameters.
+     *
+     * @param array $request Associative array of the request parameters.
      * @return \DTS\eBaySDK\PostOrder\Types\FindCancelResponse
      */
     public function searchCancellations(array $request = [])
@@ -203,7 +227,11 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
     }
 
     /**
+     * Calls the submitCancellationRequest operation.
+     *
      * @see submitCancellationRequestAsync() For method parameters.
+     *
+     * @param array $request Associative array of the request parameters.
      * @return \DTS\eBaySDK\PostOrder\Types\CreateCancelResponse
      */
     public function submitCancellationRequest(array $request = [])
@@ -231,7 +259,11 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
     }
 
     /**
+     * Calls the appealCaseDecision operation.
+     *
      * @see appealCaseDecisionAsync() For method parameters.
+     *
+     * @param array $request Associative array of the request parameters.
      */
     public function appealCaseDecision(array $request = [])
     {
@@ -261,11 +293,15 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
     }
 
     /**
+     * Calls the closeCase operation.
+     *
      * @see closeCaseAsync() For method parameters.
+     *
+     * @param array $request Associative array of the request parameters.
      */
     public function closeCase(array $request = [])
     {
-        return $this->closeCaseAsync($request)->wait();
+        $this->closeCaseAsync($request)->wait();
     }
 
     /**
@@ -291,7 +327,11 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
     }
 
     /**
+     * Calls the getCase operation.
+     *
      * @see getCaseAsync() For method parameters.
+     *
+     * @param array $request Associative array of the request parameters.
      * @return \DTS\eBaySDK\PostOrder\Types\CaseDetailsResponse
      */
     public function getCase(array $request = [])
@@ -318,5 +358,152 @@ class PostOrderService extends \DTS\eBaySDK\PostOrder\Services\PostOrderBaseServ
     public function getCaseAsync(array $request = [])
     {
         return $this->callOperationAsync('getCase', $request);
+    }
+
+    /**
+     * Calls the issueCaseRefund operation.
+     *
+     * @see issueCaseRefundAsync() For method parameters.
+     *
+     * @param array $request Associative array of the request parameters.
+     * @return \DTS\eBaySDK\PostOrder\Types\VoluntaryRefundResponse
+     */
+    public function issueCaseRefund(array $request = [])
+    {
+        return $this->issueCaseRefundAsync($request)->wait();
+    }
+
+    /**
+     * Calls the issueCaseRefund operation.
+     *
+     * The request array structure is:
+     *
+     * <code>
+     * [
+     *     'params' => [
+     *         'caseId' => string
+     *     ],
+     *     'body' => \DTS\eBaySDK\PostOrder\Types\CaseVoluntaryRefundRequest The request body.
+     * ]
+     * </code>
+     *
+     * @param array $request Associative array of the request parameters.
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function issueCaseRefundAsync(array $request = [])
+    {
+        return $this->callOperationAsync('issueCaseRefund', $request);
+    }
+
+    /**
+     * Calls the provideReturnShipmentInfo operation.
+     *
+     * @see provideReturnShipmentInfoAsync() For method parameters.
+     *
+     * @param array $request Associative array of the request parameters.
+     */
+    public function provideReturnShipmentInfo(array $request = [])
+    {
+        $this->provideReturnShipmentInfoAsync($request)->wait();
+    }
+
+    /**
+     * Calls the provideReturnShipmentInfo operation.
+     *
+     * The request array structure is:
+     *
+     * <code>
+     * [
+     *     'params' => [
+     *         'caseId' => string
+     *     ],
+     *     'body' => \DTS\eBaySDK\PostOrder\Types\ProvideShipmentInfoRequest The request body.
+     * ]
+     * </code>
+     *
+     * @param array $request Associative array of the request parameters.
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function provideReturnShipmentInfoAsync(array $request = [])
+    {
+        return $this->callOperationAsync('provideReturnShipmentInfo', $request);
+    }
+
+    /**
+     * Calls the provideReturnAddress operation.
+     *
+     * @see provideReturnAddressAsync() For method parameters.
+     *
+     * @param array $request Associative array of the request parameters.
+     */
+    public function provideReturnAddress(array $request = [])
+    {
+        $this->provideReturnAddressAsync($request)->wait();
+    }
+
+    /**
+     * Calls the provideReturnAddress operation.
+     *
+     * The request array structure is:
+     *
+     * <code>
+     * [
+     *     'params' => [
+     *         'caseId' => string
+     *     ],
+     *     'body' => \DTS\eBaySDK\PostOrder\Types\ReturnAddressRequest The request body.
+     * ]
+     * </code>
+     *
+     * @param array $request Associative array of the request parameters.
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function provideReturnAddressAsync(array $request = [])
+    {
+        return $this->callOperationAsync('provideReturnAddress', $request);
+    }
+
+    /**
+     * Calls the searchCases operation.
+     *
+     * @see searchCasesAsync() For method parameters.
+     *
+     * @param array $request Associative array of the request parameters.
+     * @return \DTS\eBaySDK\PostOrder\Types\CaseSearchResponse
+     */
+    public function searchCases(array $request = [])
+    {
+        return $this->searchCasesAsync($request)->wait();
+    }
+
+    /**
+     * Calls the searchCases operation.
+     *
+     * The request array structure is:
+     *
+     * <code>
+     * [
+     *     'params' => [
+     *         'case_creation_date_range_from' => string,
+     *         'case_creation_date_range_to'   => string,
+     *         'case_status_filter'            => string,
+     *         'fieldgroups'                   => string,
+     *         'item_id'                       => string,
+     *         'limit'                         => string,
+     *         'offset'                        => string,
+     *         'order_id'                      => string,
+     *         'return_id'                     => string,
+     *         'sort'                          => string,
+     *         'transaction_id'                => string
+     *     ]
+     * ]
+     * </code>
+     *
+     * @param array $request Associative array of the request parameters.
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function searchCasesAsync(array $request = [])
+    {
+        return $this->callOperationAsync('searchCases', $request);
     }
 }
