@@ -123,13 +123,19 @@ abstract class BaseRestService
      *
      * @return \GuzzleHttp\Promise\PromiseInterface A promise that will be resolved with an object created from the JSON response.
      */
-    protected function callOperationAsync($name, \DTS\eBaySDK\Types\BaseType $request)
+    protected function callOperationAsync($name, \DTS\eBaySDK\Types\BaseType $request = null)
     {
         $operation = static::$operations[$name];
 
-        $requestArray = $request->toArray();
-        $paramValues = array_intersect_key($requestArray, $operation['params']);
-        $requestValues = array_diff_key($requestArray, $operation['params']);
+        $requestArray = [];
+        $paramValues = [];
+        $requestValues = [];
+
+        if ($request) {
+            $requestArray = $request->toArray();
+            $paramValues = array_intersect_key($requestArray, $operation['params']);
+            $requestValues = array_diff_key($requestArray, $operation['params']);
+        }
 
         $url = $this->uriResolver->resolve(
             $this->getUrl(),
