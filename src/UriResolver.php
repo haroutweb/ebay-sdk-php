@@ -124,6 +124,10 @@ class UriResolver
 
     private function buildQueryParameters($paramValues)
     {
+        if (empty($paramValues)) {
+            return '';
+        }
+
         $query = [];
         foreach ($paramValues as $param => $value) {
             if (is_array($value)) {

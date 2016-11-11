@@ -276,4 +276,20 @@ class UriResolverTest extends \PHPUnit_Framework_TestCase
 
         $r->resolve('https://example.com', 'v1', 'item', $paramDefs, $paramValues);
     }
+
+    public function testNoParams()
+    {
+        $r = new UriResolver();
+
+        $paramDefs = [
+        ];
+
+        $paramValues = [
+        ];
+
+        $this->assertEquals(
+            'https://example.com/v1/item',
+            $r->resolve('https://example.com', 'v1', 'item', $paramDefs, $paramValues)
+        );
+    }
 }
