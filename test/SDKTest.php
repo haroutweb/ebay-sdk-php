@@ -11,6 +11,7 @@ class SdkTest extends \PHPUnit_Framework_TestCase
             'apiVersion' => '',
             'appId' => '',
             'authToken' => '',
+            'authorization' => '',
             'credentials' => ['appId' => '', 'certId' => '', 'devId' => ''],
             'globalId' => '',
             'siteId' => 0
@@ -61,6 +62,11 @@ class SdkTest extends \PHPUnit_Framework_TestCase
         $this->sdk->foo();
     }
 
+    public function testCanCreateBrowse()
+    {
+        $this->assertInstanceOf('\DTS\eBaySDK\Browse\Services\BrowseService', $this->sdk->createBrowse());
+    }
+
     public function testCanCreateBulkDataExchange()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\BulkDataExchange\Services\BulkDataExchangeService', $this->sdk->createBulkDataExchange());
@@ -84,6 +90,21 @@ class SdkTest extends \PHPUnit_Framework_TestCase
     public function testCanCreateHalfFinding()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\HalfFinding\Services\HalfFindingService', $this->sdk->createHalfFinding());
+    }
+
+    public function testCanCreateMetadata()
+    {
+        $this->assertInstanceOf('\DTS\eBaySDK\Metadata\Services\MetadataService', $this->sdk->createMetadata());
+    }
+
+    public function testCanCreateOrder()
+    {
+        $this->assertInstanceOf('\DTS\eBaySDK\Order\Services\OrderService', $this->sdk->createOrder());
+    }
+
+    public function testCanCreatePostOrder()
+    {
+        $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Services\PostOrderService', $this->sdk->createPostOrder());
     }
 
     public function testCanCreateResolutionCaseManagement()

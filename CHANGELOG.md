@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Unreleased
+
+### Features
+
+* Support Analytics API version 1.
+* Support Metadata API version 1.
+* Support Browse API version 1.
+* Support Order API version 1.
+* Support Post Order API version 2.
+
 ## 7.0.0 - 2016-09-03
 
 ### Breaking changes
