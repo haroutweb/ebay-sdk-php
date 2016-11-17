@@ -263,6 +263,7 @@ class BaseType implements JmesPathableObjectInterface
     protected function setValues($class, array $values = [])
     {
         foreach ($values as $property => $value) {
+            $value = self::removeNull($value);
             $actualValue = self::determineActualValueToAssign($class, $property, $value);
             $this->set($class, $property, $actualValue);
         }
@@ -644,5 +645,20 @@ class BaseType implements JmesPathableObjectInterface
                     return new $info['type']($value);
             }
         }
+    }
+
+    /**
+     * @param mixed $value Remove null elements if an array.
+     * @return mixed Original value if not an array or array without null elements.
+     */
+    private static function removeNull($value)
+    {
+        if (!is_array($value)) {
+            return $value;
+        }
+
+        return array_filter($value, function ($val) {
+            return !is_null($val);
+        });
     }
 }
