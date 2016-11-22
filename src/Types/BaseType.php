@@ -264,8 +264,10 @@ class BaseType implements JmesPathableObjectInterface
     {
         foreach ($values as $property => $value) {
             $value = self::removeNull($value);
-            $actualValue = self::determineActualValueToAssign($class, $property, $value);
-            $this->set($class, $property, $actualValue);
+            if (!is_null($value)) {
+                $actualValue = self::determineActualValueToAssign($class, $property, $value);
+                $this->set($class, $property, $actualValue);
+            }
         }
     }
 

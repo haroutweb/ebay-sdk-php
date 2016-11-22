@@ -143,19 +143,22 @@ class ConstructTest extends \PHPUnit_Framework_TestCase
     /**
      * This is to handle JSON responses such as
      * {
-     *     "foo": [null]
+     *     "foo": [null],
+     *     "bar": null
      * }
-     * The null object in the array results in the SDK trying to pass null
+     * The null object results in the SDK trying to pass null
      * to the ctor of an object, which expects an array.
      */
     public function testNullValuesWillNotSetProperties()
     {
         $obj = new ComplexClass([
+            'foo' => null,
             'strings' => [null, null],
             'decimalTypes' => [null, null],
             'simpleClasses' => [null, null, new SimpleClass()]
         ]);
 
+        $this->assertEquals(false, isset($obj->foo));
         $this->assertEquals(true, isset($obj->strings));
         $this->assertEquals(0, count($obj->strings));
         $this->assertEquals(false, isset($obj->decimalType));
