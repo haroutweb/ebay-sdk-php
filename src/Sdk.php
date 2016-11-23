@@ -4,11 +4,17 @@ namespace DTS\eBaySDK;
 /**
  * Builds DTS\eBaySDK services based on passed configuration options.
  *
+ * @method \DTS\eBaySDK\Browse\Services\BrowseService createBrowse(array $args = [])
  * @method \DTS\eBaySDK\BulkDataExchange\Services\BulkDataExchangeService createBulkDataExchange(array $args = [])
  * @method \DTS\eBaySDK\BusinessPoliciesManagement\Services\BusinessPoliciesManagementService createBusinessPoliciesManagement(array $args = [])
  * @method \DTS\eBaySDK\FileTransfer\Services\FileTransferService createFileTransfer(array $args = [])
  * @method \DTS\eBaySDK\Finding\Services\FindingService createFinding(array $args = [])
+ * @method \DTS\eBaySDK\Fulfillment\Services\FulfillmentService createFulfillment(array $args = [])
  * @method \DTS\eBaySDK\HalfFinding\Services\HalfFindingService createHalfFinding(array $args = [])
+ * @method \DTS\eBaySDK\Marketing\Services\MarketingService createMarketing(array $args = [])
+ * @method \DTS\eBaySDK\Metadata\Services\MetadataService createMetadata(array $args = [])
+ * @method \DTS\eBaySDK\Order\Services\OrderService createOrder(array $args = [])
+ * @method \DTS\eBaySDK\PostOrder\Services\PostOrderService createPostOrder(array $args = [])
  * @method \DTS\eBaySDK\ResolutionCaseManagement\Services\ResolutionCaseManagementService createResolutionCaseManagement(array $args = [])
  * @method \DTS\eBaySDK\Shopping\Services\ShoppingService createShopping(array $args = [])
  * @method \DTS\eBaySDK\Trading\Services\TradingService createTrading(array $args = [])

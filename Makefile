@@ -105,6 +105,10 @@ sync_finding:
 	rsync -rtvu --delete --exclude *BaseService.php ../ebay-api-sdk-php/dist/Finding/src/Finding/ src/Finding/
 	rsync -rtvu --delete --exclude /Mocks/ --exclude /Services/ ../ebay-api-sdk-php/dist/Finding/test/Finding/ test/Finding/
 
+sync_fulfillment:
+	rsync -rtvu --delete --exclude *BaseService.php ../ebay-api-sdk-php/dist/Fulfillment/src/Fulfillment/ src/Fulfillment/
+	rsync -rtvu --delete --exclude /Mocks/ --exclude /Services/ ../ebay-api-sdk-php/dist/Fulfillment/test/Fulfillment/ test/Fulfillment/
+
 sync_half:
 	rsync -rtvu --delete --exclude *BaseService.php ../ebay-api-sdk-php/dist/HalfFinding/src/HalfFinding/ src/HalfFinding/
 	rsync -rtvu --delete --exclude /Mocks/ --exclude /Services/ ../ebay-api-sdk-php/dist/HalfFinding/test/HalfFinding/ test/HalfFinding/
